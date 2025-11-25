@@ -120,8 +120,9 @@ export function HeaderClient({
   partsProducts = [],
   judgemeBadge,
 }: HeaderClientProps) {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [animatingOut, setAnimatingOut] = useState(false)
   const [quizModalOpen, setQuizModalOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -160,6 +161,26 @@ export function HeaderClient({
     }
   }, [activeDropdown])
 
+  const handleMenuEnter = (itemId: string) => {
+    if (activeDropdown && activeDropdown !== itemId) {
+      setAnimatingOut(true)
+      setTimeout(() => {
+        setAnimatingOut(false)
+        setActiveDropdown(itemId)
+      }, 200)
+    } else {
+      setActiveDropdown(itemId)
+    }
+  }
+
+  const handleMenuLeave = () => {
+    setAnimatingOut(true)
+    setTimeout(() => {
+      setActiveDropdown(null)
+      setAnimatingOut(false)
+    }, 200)
+  }
+
   if (!menuData || !menuData.items || menuData.items.length === 0) {
     return null
   }
@@ -185,7 +206,7 @@ export function HeaderClient({
               <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
                 <button
                   onClick={() => setMobileMenuOpen(true)}
-                  className="lg:hidden p-1.5 text-white hover:text-[#C8A55C] transition-colors"
+                  className="p-1.5 text-white hover:text-[#C8A55C] transition-colors"
                   aria-label="Open menu"
                 >
                   <MenuIcon className="w-5 h-5" />
@@ -202,14 +223,6 @@ export function HeaderClient({
                   className="hidden sm:inline hover:text-[#C8A55C] transition-colors whitespace-nowrap"
                 >
                   Warranty
-                </Link>
-                <span className="hidden md:inline text-white/40">|</span>
-                <Link
-                  href="/find-store"
-                  className="hidden md:flex items-center gap-1 hover:text-[#C8A55C] transition-colors whitespace-nowrap"
-                >
-                  <MapPinIcon className="w-3 h-3" />
-                  <span>Find Store</span>
                 </Link>
               </div>
 
@@ -281,8 +294,8 @@ export function HeaderClient({
                     <div
                       key={item.id}
                       className="relative"
-                      onMouseEnter={() => setActiveDropdown(item.id)}
-                      onMouseLeave={() => setActiveDropdown(null)}
+                      onMouseEnter={() => handleMenuEnter(item.id)}
+                      onMouseLeave={handleMenuLeave}
                     >
                       <Link
                         href={item.url}
@@ -295,14 +308,19 @@ export function HeaderClient({
                       </Link>
 
                       {/* Mega Menu Dropdown */}
-                      {activeDropdown === item.id && item.items && item.items.length > 0 && (
+                      {activeDropdown === item.id && !animatingOut && item.items && item.items.length > 0 && (
                         <div
                           className="fixed left-0 right-0 top-full pt-0 z-50"
                           style={{ top: "auto" }}
                           onMouseEnter={() => setActiveDropdown(item.id)}
-                          onMouseLeave={() => setActiveDropdown(null)}
+                          onMouseLeave={handleMenuLeave}
                         >
-                          <div className="bg-white shadow-2xl border-t-4 border-[#C8A55C] animate-in fade-in slide-in-from-top-2 duration-200">
+                          <div
+                            className="bg-white shadow-2xl border-t-4 border-[#C8A55C] overflow-hidden"
+                            style={{
+                              animation: "slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+                            }}
+                          >
                             <div className="container mx-auto px-4 py-6">
                               {isNFLMenuItem(item.title) ? (
                                 <NFLMenuClient

@@ -466,6 +466,41 @@
     perspective: 1000px;
   }
 
+  /* Adding smooth mega menu slide animations */
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+      max-height: 0;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1000px;
+    }
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1000px;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+      max-height: 0;
+    }
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+
   /* Adding patriotic-themed custom scrollbar styles */
   /* Custom Scrollbar - Patriotic Theme */
   ::-webkit-scrollbar {
