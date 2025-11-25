@@ -2,7 +2,6 @@
 
 import type React from "react"
 import Link from "next/link"
-import Image from "next/image"
 import { useState, useEffect, useRef } from "react"
 import { FlagpoleQuizModal } from "@/components/quiz/flagpole-quiz-modal"
 import { useCart } from "@/components/cart/cart-context"
@@ -125,13 +124,18 @@ export function HeaderClient({
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [quizModalOpen, setQuizModalOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
   const { cart } = useCart()
   const cartItemCount = cart?.lines?.edges ? cart.lines.edges.length : 0
   const menuRef = useRef<HTMLDivElement>(null)
   const { location } = useGeo()
   const stateCode = location ? getStateCodeFromRegion(location.region) : null
   const shopifyAccountUrl = `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/account`
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -170,7 +174,9 @@ export function HeaderClient({
   return (
     <>
       <header
-        className={`sticky top-0 z-50 bg-white transition-shadow duration-300 ${isScrolled ? "shadow-md" : "shadow-sm"}`}
+        className={`sticky top-0 z-50 w-full bg-white shadow-sm transition-all duration-500 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"
+        }`}
       >
         {/* Top utility bar */}
         <div className="bg-[#0B1C2C] text-white">
@@ -196,33 +202,27 @@ export function HeaderClient({
           </div>
         </div>
 
-        <div className="border-b border-gray-200 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between gap-4 h-16">
-              {/* Hamburger Menu Button */}
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="flex items-center gap-2 px-3 py-2 bg-[#0B1C2C] text-white hover:bg-[#1a2f42] rounded-lg transition-colors flex-shrink-0"
-                aria-label="Open menu"
-              >
-                <MenuIcon className="w-5 h-5" />
-                <span className="font-semibold text-sm">All</span>
-              </button>
-
-              <Link href="/" className="flex items-center gap-3 flex-shrink-0">
-                <Image
-                  src="/images/design-mode/favicon.png"
-                  alt="Atlantic Flagpole"
-                  width={44}
-                  height={44}
-                  className="w-11 h-11 object-contain"
-                  priority
+        <div className="border-b border-gray-200">
+          <div className="mx-auto max-w-[1400px] px-2 sm:px-4 lg:px-6">
+            <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
+              {/* Logo */}
+              <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
+                <img
+                  src="/images/favicon.png"
+                  alt="Atlantic Flagpole Logo"
+                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
                 />
-                <span className="text-[#0B1C2C] font-black text-xl md:text-2xl tracking-tight whitespace-nowrap">
-                  ATLANTIC<span className="text-[#C8A55C]">FLAGPOLE</span>
-                </span>
+                <div className="flex flex-col">
+                  <span className="text-xl sm:text-2xl font-bold text-[#0B1C2C] font-serif leading-tight">
+                    ATLANTIC
+                  </span>
+                  <span className="text-[10px] sm:text-xs text-[#D4AF37] font-semibold tracking-wider leading-tight">
+                    FLAGPOLE
+                  </span>
+                </div>
               </Link>
 
+              {/* Desktop Navigation */}
               <nav className="hidden lg:flex items-center justify-center flex-1" ref={menuRef}>
                 <div className="flex items-center gap-1">
                   {menuItems.map((item: any) => (
@@ -317,7 +317,7 @@ export function HeaderClient({
         <div className="bg-[#F5F3EF] border-b border-gray-200">
           <div className="container mx-auto px-2 md:px-4">
             <div className="flex items-center gap-2 h-10">
-              {/* Quick Links - smaller */}
+              {/* Quick Links - compact */}
               <div className="hidden lg:flex items-center gap-0.5 flex-shrink-0">
                 {[
                   { href: "/reviews", label: "Reviews" },
@@ -347,27 +347,6 @@ export function HeaderClient({
             </div>
           </div>
         </div>
-
-        {/* Mobile Search */}
-        <div className="md:hidden border-b border-gray-200 bg-white">
-          <div className="container mx-auto px-4 py-2">
-            <button
-              onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
-              className="w-full flex items-center gap-2 px-3 py-2 bg-gray-100 rounded-lg text-gray-500 text-sm"
-            >
-              <SearchIcon className="w-4 h-4" />
-              <span>Search flagpoles, flags, accessories...</span>
-            </button>
-          </div>
-        </div>
-
-        {mobileSearchOpen && (
-          <div className="md:hidden border-b border-gray-200 bg-white">
-            <div className="container mx-auto px-4 py-3">
-              <SearchBarWrapper />
-            </div>
-          </div>
-        )}
       </header>
 
       <MobileMenuEnhanced
@@ -378,6 +357,13 @@ export function HeaderClient({
           setMobileMenuOpen(false)
           setQuizModalOpen(true)
         }}
+        menuData={menuData}
+        megaMenuData={megaMenuData}
+        submenuProductsData={submenuProductsData}
+        nflFlagProducts={nflFlagProducts}
+        christmasTreeProducts={christmasTreeProducts}
+        holidayProducts={holidayProducts}
+        partsProducts={partsProducts}
       />
 
       <FlagpoleQuizModal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} />

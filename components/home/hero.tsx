@@ -65,7 +65,7 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 200)
+    const timer = setTimeout(() => setIsVisible(true), 300)
     return () => clearTimeout(timer)
   }, [])
 
@@ -93,7 +93,11 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
 
   return (
     <>
-      <section className="relative w-full min-h-[550px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[700px] overflow-hidden bg-[#0B1C2C]">
+      <section
+        className={`relative w-full min-h-[550px] sm:min-h-[600px] md:min-h-[650px] lg:min-h-[700px] overflow-hidden bg-[#0B1C2C] transition-all duration-700 ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
+      >
         {/* Background Image - centered on mobile, right-aligned on desktop */}
         <div className={`transition-opacity duration-1000 ${isVisible ? "opacity-100" : "opacity-0"}`}>
           <Image
@@ -296,6 +300,19 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
               <p className="text-[10px] sm:text-xs md:text-sm font-extrabold text-white uppercase tracking-wide">
                 IN STOCK | SHIPS IN 1-2 BUSINESS DAYS
               </p>
+            </div>
+
+            {/* Trust Badges Row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
+              <div className="flex flex-col items-center justify-center bg-white/95 backdrop-blur-sm p-3 md:p-5 rounded-xl border border-gray-200/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <img
+                  src="/images/madeinusabadge.jpg"
+                  alt="Made in USA"
+                  className="h-8 w-8 md:h-12 md:w-12 object-contain mb-1 md:mb-2"
+                />
+                <span className="text-[10px] md:text-sm font-semibold text-[#0B1C2C] text-center">Made in USA</span>
+              </div>
+              {/* Additional badges can be added here */}
             </div>
 
             {/* Terms */}

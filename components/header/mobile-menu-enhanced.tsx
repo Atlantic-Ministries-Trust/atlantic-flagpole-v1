@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import type { ShopifyProduct } from "@/lib/types"
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
@@ -118,7 +119,7 @@ const PackageIcon = ({ className }: { className?: string }) => (
   >
     <path d="m7.5 4.27 9 5.15" />
     <path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-    <path d="m3.3 7 8.7 5 8.7-5" />
+    <path d="M3.3 7 8.7 5 8.7-4" />
     <path d="M12 22V12" />
   </svg>
 )
@@ -330,7 +331,7 @@ const HomeIcon = ({ className }: { className?: string }) => (
     strokeLinejoin="round"
     className={className}
   >
-    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    <path d="m3 9 9-7 9 7v11a2 2 0 0 0-2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
     <polyline points="9 22 9 12 15 12 15 22" />
   </svg>
 )
@@ -378,7 +379,7 @@ const SettingsIcon = ({ className }: { className?: string }) => (
     strokeLinejoin="round"
     className={className}
   >
-    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.38a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
     <circle cx="12" cy="12" r="3" />
   </svg>
 )
@@ -441,7 +442,7 @@ const FileTextIcon = ({ className }: { className?: string }) => (
     strokeLinejoin="round"
     className={className}
   >
-    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
     <polyline points="14 2 14 8 20 8" />
     <line x1="16" x2="8" y1="13" y2="13" />
     <line x1="16" x2="8" y1="17" y2="17" />
@@ -469,10 +470,17 @@ const PercentIcon = ({ className }: { className?: string }) => (
 interface MobileMenuEnhancedProps {
   isOpen: boolean
   onClose: () => void
-  location?: { region: string } | null
+  location?: any
   stateCode?: string | null
-  shopifyAccountUrl: string
-  onQuizOpen: () => void
+  shopifyAccountUrl?: string
+  onQuizOpen?: () => void
+  menuData?: any
+  megaMenuData?: Record<string, any>
+  submenuProductsData?: Record<string, any[]>
+  nflFlagProducts?: ShopifyProduct[]
+  christmasTreeProducts?: ShopifyProduct[]
+  holidayProducts?: ShopifyProduct[]
+  partsProducts?: ShopifyProduct[]
 }
 
 type TabType = "shop" | "explore" | "help" | "account"
@@ -484,6 +492,13 @@ export function MobileMenuEnhanced({
   stateCode,
   shopifyAccountUrl,
   onQuizOpen,
+  menuData,
+  megaMenuData = {},
+  submenuProductsData = {},
+  nflFlagProducts = [],
+  christmasTreeProducts = [],
+  holidayProducts = [],
+  partsProducts = [],
 }: MobileMenuEnhancedProps) {
   const [activeTab, setActiveTab] = useState<TabType>("shop")
   const [expandedSections, setExpandedSections] = useState<string[]>([])
@@ -531,7 +546,7 @@ export function MobileMenuEnhanced({
   ]
 
   const quickLinks = [
-    { label: "Flagpole Quiz", icon: <SparklesIcon className="w-5 h-5" />, onClick: onQuizOpen },
+    { label: "Flagpole Quiz", icon: <SparklesIcon className="w-5 h-5" />, action: onQuizOpen },
     { label: "Find My State", icon: <MapPinIcon className="w-5 h-5" />, href: "/state-flags" },
     { label: "Compare Products", icon: <StarIcon className="w-5 h-5" />, href: "/compare" },
     { label: "Holiday Deals", icon: <GiftIcon className="w-5 h-5" />, href: "/holiday-seasonal" },
@@ -558,18 +573,88 @@ export function MobileMenuEnhanced({
     { label: "Settings", icon: <SettingsIcon className="w-5 h-5" />, href: "/cookie-settings" },
   ]
 
-  const renderShopContent = () => {
-    if (currentCategory) {
+  const renderShopTab = () => {
+    if (categoryStack.length > 0) {
+      const categoryIndex = categoryStack[0].index
+      const currentCategory = navigationConfig[categoryIndex]
+
+      const categoryProducts = submenuProductsData[currentCategory.title] || []
+
       return (
-        <div className="animate-in slide-in-from-right-4 duration-200">
+        <div className="space-y-6">
+          {/* Back Button */}
           <button
-            onClick={navigateBack}
-            className="flex items-center gap-2 text-[#B8860B] font-medium mb-4 hover:underline"
+            onClick={() => setCategoryStack([])}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
           >
-            <ChevronLeftIcon className="w-4 h-4" />
-            Back
+            <ChevronLeftIcon className="w-5 h-5" />
+            <span className="font-medium">Back to Categories</span>
           </button>
-          <h3 className="text-lg font-bold text-[#0B1C2C] mb-4">{currentCategory.title}</h3>
+
+          <h2 className="text-2xl font-bold text-gray-900">{currentCategory.title}</h2>
+
+          {/* Category Products */}
+          {categoryProducts.length > 0 && (
+            <div className="mb-6">
+              <h4 className="text-sm font-semibold text-gray-500 uppercase mb-3">Featured Products</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {categoryProducts.slice(0, 6).map((product: any, idx: number) => (
+                  <Link
+                    key={idx}
+                    href={`/products/${product.handle}`}
+                    onClick={onClose}
+                    className="block bg-white rounded-lg border border-gray-200 p-3 hover:border-[#C8A55C] transition-all"
+                  >
+                    {product.images?.nodes?.[0]?.url && (
+                      <div className="aspect-square mb-2 relative overflow-hidden rounded-md bg-gray-100">
+                        <Image
+                          src={product.images.nodes[0].url || "/placeholder.svg"}
+                          alt={product.title}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    )}
+                    <h5 className="text-xs font-medium text-gray-900 line-clamp-2">{product.title}</h5>
+                    {product.priceRange?.minVariantPrice && (
+                      <p className="text-sm font-bold text-[#C8A55C] mt-1">
+                        ${product.priceRange.minVariantPrice.amount}
+                      </p>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {currentCategory.title.toLowerCase().includes("nfl") && nflFlagProducts.length > 0 && (
+            <div className="mb-6">
+              <h4 className="text-sm font-semibold text-gray-500 uppercase mb-3">NFL Team Flags</h4>
+              <div className="grid grid-cols-2 gap-3">
+                {nflFlagProducts.slice(0, 6).map((product: any, idx: number) => (
+                  <Link
+                    key={idx}
+                    href={`/products/${product.handle}`}
+                    onClick={onClose}
+                    className="block bg-white rounded-lg border border-gray-200 p-3 hover:border-[#C8A55C] transition-all"
+                  >
+                    {product.images?.nodes?.[0]?.url && (
+                      <div className="aspect-square mb-2 relative overflow-hidden rounded-md bg-gray-100">
+                        <Image
+                          src={product.images.nodes[0].url || "/placeholder.svg"}
+                          alt={product.title}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    )}
+                    <h5 className="text-xs font-medium text-gray-900 line-clamp-2">{product.title}</h5>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+
           <div className="space-y-1">
             {currentCategory.items.map((item, idx) => (
               <Link
@@ -589,75 +674,202 @@ export function MobileMenuEnhanced({
 
     return (
       <div className="space-y-6">
-        {/* Quick Links Grid */}
-        <div className="grid grid-cols-2 gap-3">
+        {/* Condensed Quick Links Grid */}
+        <div className="grid grid-cols-4 gap-2">
           {quickLinks.map((link, idx) => (
             <button
               key={idx}
               onClick={() => {
-                if (link.onClick) {
-                  link.onClick()
-                  onClose()
-                }
+                if (link.action) link.action()
+                else onClose()
               }}
-              className="flex flex-col items-center justify-center gap-2 p-4 bg-gradient-to-br from-[#0B1C2C] to-[#1a3a5c] rounded-xl text-white hover:shadow-lg transition-all"
+              className="flex flex-col items-center gap-1 p-2 bg-white rounded-lg border border-gray-200 hover:border-[#C8A55C] transition-all"
             >
-              {link.onClick ? (
-                <>
-                  {link.icon}
-                  <span className="text-sm font-medium">{link.label}</span>
-                </>
-              ) : (
-                <Link href={link.href || "#"} onClick={onClose} className="flex flex-col items-center gap-2">
-                  {link.icon}
-                  <span className="text-sm font-medium">{link.label}</span>
-                </Link>
-              )}
+              <div className="w-8 h-8 bg-[#0B1C2C]/5 rounded-full flex items-center justify-center">{link.icon}</div>
+              <span className="text-[10px] font-medium text-center leading-tight">{link.label}</span>
             </button>
           ))}
         </div>
 
-        {/* Shop Categories */}
+        {/* Top Deals Section */}
+        {holidayProducts.length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-bold text-gray-900">Top Deals</h3>
+              <Link href="/holiday-seasonal" onClick={onClose} className="text-xs text-[#C8A55C] hover:underline">
+                View All
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {holidayProducts.slice(0, 4).map((product: any, idx: number) => (
+                <Link
+                  key={idx}
+                  href={`/products/${product.handle}`}
+                  onClick={onClose}
+                  className="block bg-white rounded-lg border border-gray-200 p-3 hover:border-[#C8A55C] transition-all"
+                >
+                  {product.images?.nodes?.[0]?.url && (
+                    <div className="aspect-square mb-2 relative overflow-hidden rounded-md bg-gray-100">
+                      <Image
+                        src={product.images.nodes[0].url || "/placeholder.svg"}
+                        alt={product.title}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  )}
+                  <h5 className="text-xs font-medium text-gray-900 truncate">{product.title}</h5>
+                  {product.priceRange?.minVariantPrice && (
+                    <p className="text-sm font-bold text-[#C8A55C] mt-1">
+                      ${product.priceRange.minVariantPrice.amount}
+                    </p>
+                  )}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Popular Products Section */}
+        {Object.keys(submenuProductsData).length > 0 && (
+          <div>
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-bold text-gray-900">Popular Products</h3>
+              <Link href="/collections/all" onClick={onClose} className="text-xs text-[#C8A55C] hover:underline">
+                View All
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {Object.values(submenuProductsData)
+                .flat()
+                .slice(0, 4)
+                .map((product: any, idx: number) => (
+                  <Link
+                    key={idx}
+                    href={`/products/${product.handle}`}
+                    onClick={onClose}
+                    className="block bg-white rounded-lg border border-gray-200 p-3 hover:border-[#C8A55C] transition-all"
+                  >
+                    {product.images?.nodes?.[0]?.url && (
+                      <div className="aspect-square mb-2 relative overflow-hidden rounded-md bg-gray-100">
+                        <Image
+                          src={product.images.nodes[0].url || "/placeholder.svg"}
+                          alt={product.title}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    )}
+                    <h5 className="text-xs font-medium text-gray-900 truncate">{product.title}</h5>
+                    {product.priceRange?.minVariantPrice && (
+                      <p className="text-sm font-bold text-[#C8A55C] mt-1">
+                        ${product.priceRange.minVariantPrice.amount}
+                      </p>
+                    )}
+                  </Link>
+                ))}
+            </div>
+          </div>
+        )}
+
+        {/* Shop By Category */}
         <div>
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Shop By Category</h3>
-          <div className="space-y-1">
-            {navigationConfig.map((category, idx) => (
-              <button
-                key={idx}
-                onClick={() => navigateToCategory(idx, category.title)}
-                className="flex items-center justify-between w-full py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-[#0B1C2C]/5 rounded-lg flex items-center justify-center">
-                    <FlagIcon className="w-5 h-5 text-[#0B1C2C]" />
-                  </div>
-                  <span className="font-medium text-gray-900">{category.title}</span>
+          <h3 className="text-sm font-bold text-gray-900 mb-3">Shop By Category</h3>
+          <div className="space-y-2">
+            {navigationConfig.map((category, idx) => {
+              const categoryProducts = submenuProductsData[category.title] || []
+              const isExpanded = expandedSections.includes(`category-${idx}`)
+
+              return (
+                <div key={idx} className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+                  <button
+                    onClick={() => toggleSection(`category-${idx}`)}
+                    className="w-full flex items-center justify-between p-3 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 bg-[#0B1C2C]/5 rounded-lg flex items-center justify-center">
+                        <FlagIcon className="w-5 h-5 text-[#0B1C2C]" />
+                      </div>
+                      <div className="text-left">
+                        <span className="font-semibold text-sm text-gray-900 block">{category.title}</span>
+                        {categoryProducts.length > 0 && (
+                          <span className="text-xs text-gray-500">{categoryProducts.length} products</span>
+                        )}
+                      </div>
+                    </div>
+                    <ChevronRightIcon
+                      className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? "rotate-90" : ""}`}
+                    />
+                  </button>
+
+                  {isExpanded && (
+                    <div className="px-3 pb-3 space-y-1 border-t border-gray-100">
+                      {category.items.map((item, itemIdx) => (
+                        <Link
+                          key={itemIdx}
+                          href={item.href}
+                          onClick={onClose}
+                          className="block py-2 px-3 text-sm text-gray-700 hover:bg-gray-50 rounded transition-colors"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <ChevronRightIcon className="w-5 h-5 text-gray-400" />
-              </button>
-            ))}
+              )
+            })}
           </div>
         </div>
 
-        {/* Single Nav Items */}
-        <div>
-          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">Quick Access</h3>
-          <div className="space-y-1">
-            {singleNavItems.map((item, idx) => (
-              <Link
-                key={idx}
-                href={item.href}
-                onClick={onClose}
-                className="flex items-center gap-3 py-3 px-2 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <div className="w-10 h-10 bg-[#B8860B]/10 rounded-lg flex items-center justify-center">
-                  <AwardIcon className="w-5 h-5 text-[#B8860B]" />
-                </div>
-                <span className="font-medium text-gray-900">{item.label}</span>
-              </Link>
-            ))}
+        {/* More to Explore */}
+        {singleNavItems.length > 0 && (
+          <div>
+            <h3 className="text-sm font-bold text-gray-900 mb-3">More to Explore</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {singleNavItems.map((item, idx) => {
+                // Get related products for special sections with better matching
+                let relatedProduct = null
+                const itemLower = item.label.toLowerCase()
+
+                if (itemLower.includes("nfl") || itemLower.includes("football")) {
+                  relatedProduct = nflFlagProducts[0]
+                } else if (itemLower.includes("christmas") || itemLower.includes("tree")) {
+                  relatedProduct = christmasTreeProducts[0]
+                } else if (itemLower.includes("holiday") || itemLower.includes("seasonal")) {
+                  relatedProduct = holidayProducts[0]
+                } else if (itemLower.includes("parts") || itemLower.includes("accessories")) {
+                  relatedProduct = partsProducts[0]
+                }
+
+                return (
+                  <Link
+                    key={idx}
+                    href={item.href}
+                    onClick={onClose}
+                    className="flex flex-col bg-white rounded-lg border border-gray-200 p-3 hover:border-[#C8A55C] transition-all"
+                  >
+                    {relatedProduct?.images?.nodes?.[0]?.url ? (
+                      <div className="aspect-square mb-2 relative overflow-hidden rounded-md bg-gray-100">
+                        <Image
+                          src={relatedProduct.images.nodes[0].url || "/placeholder.svg"}
+                          alt={item.label}
+                          fill
+                          className="object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="aspect-square mb-2 bg-[#0B1C2C]/5 rounded-md flex items-center justify-center">
+                        <FlagIcon className="w-8 h-8 text-[#0B1C2C]" />
+                      </div>
+                    )}
+                    <span className="text-xs font-medium text-gray-900 truncate">{item.label}</span>
+                  </Link>
+                )
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     )
   }
@@ -719,26 +931,33 @@ export function MobileMenuEnhanced({
   const renderHelpContent = () => (
     <div className="space-y-6">
       {/* Flaggy AI Chat */}
-      <div className="bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-6 text-white">
-        <div className="flex items-center gap-3 mb-3">
-          <SparklesIcon className="w-8 h-8" />
-          <h3 className="text-lg font-bold">Chat with Flaggy AI</h3>
+      <div className="relative bg-gradient-to-br from-purple-600 to-indigo-700 rounded-2xl p-6 text-white overflow-hidden">
+        {/* Flaggy photo overlay in top right */}
+        <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full overflow-hidden border-4 border-white/20 shadow-xl opacity-30">
+          <Image src="/images/design-mode/Flaggy.png" alt="Flaggy" fill className="object-cover object-top" />
         </div>
-        <p className="text-sm text-white/80 mb-4">
-          Get instant answers about flagpoles, installation, and more from our AI assistant.
-        </p>
-        <button
-          onClick={() => {
-            onClose()
-            // Trigger Flaggy chat
-            const flaggyButton = document.querySelector("[data-flaggy-trigger]")
-            if (flaggyButton) (flaggyButton as HTMLButtonElement).click()
-          }}
-          className="inline-flex items-center gap-2 bg-white text-purple-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition-colors"
-        >
-          Start Chat
-          <MessageCircleIcon className="w-4 h-4" />
-        </button>
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-3">
+            <SparklesIcon className="w-8 h-8" />
+            <h3 className="text-lg font-bold">Chat with Flaggy AI</h3>
+          </div>
+          <p className="text-sm text-white/90 mb-4">
+            Get instant answers about flagpoles, installation, and more from our AI assistant.
+          </p>
+          <button
+            onClick={() => {
+              onClose()
+              // Trigger Flaggy chat via data attribute
+              const flaggyButton = document.querySelector("[data-flaggy-trigger]")
+              if (flaggyButton) (flaggyButton as HTMLButtonElement).click()
+            }}
+            className="inline-flex items-center gap-2 bg-white text-purple-700 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition-colors shadow-md"
+          >
+            Start Chat
+            <MessageCircleIcon className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Help Links */}
@@ -853,7 +1072,7 @@ export function MobileMenuEnhanced({
               className={cn(
                 "flex-1 flex flex-col items-center gap-1 py-3 text-xs font-medium transition-colors",
                 activeTab === tab.id
-                  ? "text-[#B8860B] border-b-2 border-[#B8860B] bg-white"
+                  ? "text-[#B8860B] border-b-2 border-[#B8A55C] bg-white"
                   : "text-gray-500 hover:text-gray-700",
               )}
             >
@@ -865,7 +1084,7 @@ export function MobileMenuEnhanced({
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-4">
-          {activeTab === "shop" && renderShopContent()}
+          {activeTab === "shop" && renderShopTab()}
           {activeTab === "explore" && renderExploreContent()}
           {activeTab === "help" && renderHelpContent()}
           {activeTab === "account" && renderAccountContent()}

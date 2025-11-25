@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { X, Send, HelpCircle, Star, ShoppingCart } from 'lucide-react'
+import { X, Send, Star, ShoppingCart } from "lucide-react"
 import Image from "next/image"
 
 interface Message {
@@ -36,11 +36,9 @@ interface FlaggyChatWidgetProps {
 
 export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }: FlaggyChatWidgetProps) {
   const [internalState, setInternalState] = useState<FlaggyState>("hidden")
-  
+
   // Use props if provided, otherwise internal state
-  const flaggyState = isOpen !== undefined 
-    ? (isOpen ? "expanded" : "minimized") 
-    : internalState
+  const flaggyState = isOpen !== undefined ? (isOpen ? "expanded" : "minimized") : internalState
 
   const setFlaggyState = (newState: FlaggyState) => {
     if (onToggle && (newState === "expanded" || newState === "minimized")) {
@@ -70,7 +68,10 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
         console.log("[v0] Flaggy sliding in after 5 seconds")
         setFlaggyState("sliding-in")
         setHasShownInitialAnimation(true)
-        setTimeout(() => setShowHelpBubble(true), 500)
+
+        setTimeout(() => {
+          setShowHelpBubble(true)
+        }, 2000)
 
         setTimeout(() => {
           if (flaggyState === "sliding-in") {
@@ -461,7 +462,7 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
                     <button
                       key={suggestion.intent}
                       onClick={() => handleSuggestionClick(suggestion.intent, suggestion.label)}
-                      className="w-full text-left px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-[#C8A55C] text-[#0B1C2C] rounded-lg hover:bg-[#C8A55C] hover:text-white transition-all duration-200 text-xs md:text-sm font-medium shadow-sm"
+                      className="w-full text-left px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-[#C8A55C] text-[#0B1C2CC] rounded-lg hover:bg-[#C8A55C] hover:text-white transition-all duration-200 text-xs md:text-sm font-medium shadow-sm"
                     >
                       {suggestion.label}
                     </button>
@@ -544,27 +545,51 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
   return (
     <>
       {flaggyState === "minimized" && (
-        <button
-          onClick={handleFlaggyClick}
-          className="fixed bottom-20 md:bottom-[180px] right-1 md:right-0 z-[110] bg-[#C8A55C] hover:bg-[#B8954C] text-white px-1.5 md:px-2 py-4 md:py-6 rounded-l-lg shadow-lg transition-all duration-300 hover:px-2 md:hover:px-3 group"
-          aria-label="Open Flaggy chat"
-        >
-          <div className="flex flex-col items-center">
-            <HelpCircle className="w-4 h-4 md:w-5 md:h-5 text-white" />
-          </div>
-        </button>
+        <div className="fixed bottom-0 right-0 z-[110] flex flex-col items-end">
+          {/* Scroll bar with integrated question mark button */}
+          <button
+            onClick={handleFlaggyClick}
+            data-flaggy-trigger
+            className="relative w-10 h-16 md:w-12 md:h-20 bg-gradient-to-b from-[#C8A55C] via-[#B8954C] to-[#A8854C] hover:from-[#D8B56C] hover:via-[#C8A55C] hover:to-[#B8954C] rounded-tl-xl shadow-xl transition-all duration-300 hover:w-12 hover:h-24 md:hover:w-14 md:hover:h-24 group"
+            aria-label="Chat with Flaggy AI"
+          >
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <svg
+                className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow-lg group-hover:scale-110 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2.5}
+                  d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+
+            <div className="absolute right-full mr-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+              <div className="bg-[#0B1C2CC] text-white px-2 py-1.5 rounded-lg shadow-xl whitespace-nowrap text-xs font-semibold">
+                Help
+                <div className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-[#0B1C2C]"></div>
+              </div>
+            </div>
+          </button>
+        </div>
       )}
 
       {flaggyState === "sliding-in" && (
         <>
           <div
             onClick={handleFlaggyClick}
+            data-flaggy-trigger
             className="fixed bottom-2 md:bottom-4 right-2 md:right-4 z-[110] cursor-pointer animate-slide-in-from-right"
             style={{
               transform: "translateX(0%) rotate(-5deg)",
             }}
           >
-            <div className="relative w-20 h-20 md:w-32 md:h-32 animate-rock">
+            <div className="relative w-20 h-20 md:w-36 md:h-36 animate-rock">
               <Image
                 src="/images/design-mode/Flaggy.png"
                 alt="Flaggy"
@@ -576,15 +601,10 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
           </div>
 
           {showHelpBubble && (
-            <div
-              className="fixed bottom-24 md:bottom-40 right-2 md:right-4 z-[109] animate-in fade-in slide-in-from-bottom-2 duration-500"
-              style={{ animationDelay: "0.3s" }}
-            >
-              <div className="relative bg-white px-3 py-2 md:px-4 md:py-2.5 rounded-2xl shadow-xl border-2 border-[#C8A55C] max-w-[140px] md:max-w-[180px]">
-                <p className="text-xs md:text-sm font-semibold text-[#0B1C2C] text-center whitespace-nowrap">
-                  Hey, Need help?
-                </p>
-                <div className="absolute -bottom-2 right-6 md:right-10 w-4 h-4 bg-white border-r-2 border-b-2 border-[#C8A55C] transform rotate-45"></div>
+            <div className="fixed bottom-24 md:bottom-44 right-2 md:right-4 z-[109] animate-in fade-in slide-in-from-bottom-2 duration-500">
+              <div className="relative bg-white px-3 py-2 md:px-4 md:py-2.5 rounded-xl shadow-xl border-2 border-[#C8A55C] max-w-[120px] md:max-w-[140px]">
+                <p className="text-xs md:text-sm font-bold text-[#0B1C2C] text-center">Live Chat</p>
+                <div className="absolute -bottom-1.5 right-6 md:right-8 w-3 h-3 bg-white border-r-2 border-b-2 border-[#C8A55C] transform rotate-45"></div>
               </div>
             </div>
           )}
@@ -592,41 +612,39 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
       )}
 
       {flaggyState === "expanded" && (
-        <div className="fixed bottom-2 md:bottom-4 right-2 md:right-4 z-[120] w-[90vw] md:w-[85vw] max-w-md h-[500px] md:h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-[#C8A55C] flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
-          <div className="bg-gradient-to-r from-[#0B1C2C] to-[#1a2d3f] text-white p-3 md:p-4 flex items-center justify-between relative overflow-hidden">
+        <div className="fixed bottom-2 md:bottom-4 right-2 md:right-4 z-[120] w-[92vw] md:w-[85vw] max-w-md h-[480px] md:h-[600px] bg-white rounded-2xl shadow-2xl border-2 border-[#C8A55C] flex flex-col overflow-hidden animate-in slide-in-from-right duration-300">
+          <div className="bg-gradient-to-r from-[#0B1C2C] to-[#1a2d3f] text-white p-2.5 md:p-4 flex items-center justify-between relative overflow-hidden">
             <div className="absolute inset-0 opacity-10">
               <div className="absolute inset-0 bg-[url('/placeholder.svg?height=100&width=100')] animate-pulse"></div>
             </div>
 
-            <div className="flex items-center gap-2 md:gap-3 relative z-10">
-              <div className="relative w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-[#C8A55C] to-[#B8954C] rounded-full p-1 shadow-lg">
-                <div className="relative w-full h-full bg-white rounded-full p-1 overflow-hidden">
-                  <Image src="/images/design-mode/Flaggy.png" alt="Flaggy" fill className="object-cover" />
+            <div className="flex items-center gap-2 relative z-10">
+              <div className="relative w-8 h-8 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-[#C8A55C] shadow-lg">
+                <Image src="/images/design-mode/Flaggy.png" alt="Flaggy" fill className="object-cover" />
+              </div>
+              <div>
+                <h3 className="font-bold text-sm md:text-lg">Flaggy AI</h3>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full animate-pulse"></div>
+                  <p className="text-[10px] md:text-xs text-gray-300">Online 24/7</p>
                 </div>
               </div>
-              <div className="flex-1">
-                <h3 className="font-bold text-base md:text-lg">Flaggy</h3>
-                <p className="text-[10px] md:text-xs text-white/90 flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                  </span>
-                  Your AI Flagpole Assistant
-                </p>
-              </div>
             </div>
+
             <button
               onClick={handleClose}
-              className="ml-2 text-white hover:text-gray-300 transition-colors relative z-10"
-              aria-label="Minimize chat"
+              className="relative z-10 text-white hover:bg-white/10 rounded-full p-1 md:p-2 transition-colors"
+              aria-label="Close chat"
             >
-              <X className="w-5 h-5" />
+              <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
 
           <div
             ref={chatContainerRef}
-            className="flex-1 p-3 md:p-4 overflow-y-auto bg-gradient-to-b from-gray-50 to-white relative"
+            className="flex-1 p-2.5 md:p-4 overflow-y-auto bg-gradient-to-b from-gray-50 to-white relative"
           >
             {messages.map((msg) => (
               <div
@@ -781,7 +799,7 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
                   <button
                     key={suggestion.intent}
                     onClick={() => handleSuggestionClick(suggestion.intent, suggestion.label)}
-                    className="w-full text-left px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-[#C8A55C] text-[#0B1C2C] rounded-lg hover:bg-[#C8A55C] hover:text-white transition-all duration-200 text-xs md:text-sm font-medium shadow-sm"
+                    className="w-full text-left px-3 md:px-4 py-1.5 md:py-2 bg-white border-2 border-[#C8A55C] text-[#0B1C2CC] rounded-lg hover:bg-[#C8A55C] hover:text-white transition-all duration-200 text-xs md:text-sm font-medium shadow-sm"
                   >
                     {suggestion.label}
                   </button>
@@ -830,7 +848,7 @@ export function FlaggyChatWidget({ embedded = false, isOpen, onClose, onToggle }
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-3 md:p-4 border-t-2 border-gray-200 bg-white">
+          <div className="p-2.5 md:p-4 border-t-2 border-gray-200 bg-white">
             <div className="flex gap-2">
               <input
                 type="text"

@@ -425,6 +425,37 @@
     animation: slide-in-right 0.3s ease-out;
   }
 
+  /* Added optimized page load animations */
+  @keyframes header-slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-header-slide-down {
+    animation: header-slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-hero-slide-up {
+    animation: hero-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  }
+
   /* Adding vertical writing mode for tab text */
   .writing-mode-vertical {
     writing-mode: vertical-rl;

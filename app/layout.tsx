@@ -11,6 +11,7 @@ import { JudgeMePlatformScript } from "@/components/judgeme/judgeme-platform-scr
 import { PhoenixHomeTrialBar } from "@/components/phoenix-home-trial-bar"
 import { GeoProvider } from "@/lib/geo/context"
 import { Toaster } from "@/components/ui/toaster"
+import { FlaggyChatWidget } from "@/components/flaggy-chat/flaggy-chat-widget"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -119,6 +120,7 @@ export default function RootLayout({
             </Suspense>
             <main className="w-full overflow-x-hidden relative">{children}</main>
             <LazyFooter />
+            <FlaggyChatWidget />
           </GeoProvider>
         </CartProvider>
         <JudgeMePlatformScript />
