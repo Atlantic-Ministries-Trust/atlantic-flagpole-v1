@@ -115,7 +115,7 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "linear-gradient(180deg, rgba(11, 28, 44, 0.2) 0%, rgba(11, 28, 44, 0.3) 50%, rgba(11, 28, 44, 0.35) 100%), linear-gradient(90deg, rgba(11, 28, 44, 0.85) 0%, rgba(11, 28, 44, 0.4) 15%, rgba(11, 28, 44, 0.1) 30%, rgba(11, 28, 44, 0) 45%)",
+              "linear-gradient(95deg, rgba(11, 28, 44, 0.75) 0%, rgba(11, 28, 44, 0.4) 35%, rgba(11, 28, 44, 0.15) 55%, rgba(11, 28, 44, 0) 70%)",
           }}
         />
 

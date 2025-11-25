@@ -1000,13 +1000,13 @@ export function MobileMenuEnhanced({
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b bg-[#0B1C2C]">
           <Link href="/" onClick={onClose} className="flex items-center gap-2">
-            <Image
-              src="/images/atlantic-flagpole-logo.png"
-              alt="Atlantic Flagpole"
-              width={140}
-              height={40}
-              className="h-8 w-auto brightness-0 invert"
-            />
+            <img src="/images/favicon.png" alt="Atlantic Flagpole Logo" className="h-10 w-10 object-contain" />
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-white font-serif leading-tight">ATLANTIC</span>
+              <span className="text-[9px] text-[#D4AF37] font-semibold tracking-[0.48em] leading-tight text-center w-full">
+                FLAGPOLE
+              </span>
+            </div>
           </Link>
           <button
             onClick={onClose}

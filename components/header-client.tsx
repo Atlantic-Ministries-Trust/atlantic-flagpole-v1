@@ -122,7 +122,6 @@ export function HeaderClient({
 }: HeaderClientProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [animatingOut, setAnimatingOut] = useState(false)
   const [quizModalOpen, setQuizModalOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
@@ -162,23 +161,11 @@ export function HeaderClient({
   }, [activeDropdown])
 
   const handleMenuEnter = (itemId: string) => {
-    if (activeDropdown && activeDropdown !== itemId) {
-      setAnimatingOut(true)
-      setTimeout(() => {
-        setAnimatingOut(false)
-        setActiveDropdown(itemId)
-      }, 200)
-    } else {
-      setActiveDropdown(itemId)
-    }
+    setActiveDropdown(itemId)
   }
 
   const handleMenuLeave = () => {
-    setAnimatingOut(true)
-    setTimeout(() => {
-      setActiveDropdown(null)
-      setAnimatingOut(false)
-    }, 200)
+    setActiveDropdown(null)
   }
 
   if (!menuData || !menuData.items || menuData.items.length === 0) {
@@ -308,19 +295,14 @@ export function HeaderClient({
                       </Link>
 
                       {/* Mega Menu Dropdown */}
-                      {activeDropdown === item.id && !animatingOut && item.items && item.items.length > 0 && (
+                      {activeDropdown === item.id && item.items && item.items.length > 0 && (
                         <div
-                          className="fixed left-0 right-0 top-full pt-0 z-50"
-                          style={{ top: "auto" }}
+                          className="fixed left-0 right-0 pt-0 z-50 animate-slideDown"
+                          style={{ top: "100%" }}
                           onMouseEnter={() => setActiveDropdown(item.id)}
                           onMouseLeave={handleMenuLeave}
                         >
-                          <div
-                            className="bg-white shadow-2xl border-t-4 border-[#C8A55C] overflow-hidden"
-                            style={{
-                              animation: "slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards",
-                            }}
-                          >
+                          <div className="bg-white shadow-2xl border-t-4 border-[#C8A55C]">
                             <div className="container mx-auto px-4 py-6">
                               {isNFLMenuItem(item.title) ? (
                                 <NFLMenuClient
