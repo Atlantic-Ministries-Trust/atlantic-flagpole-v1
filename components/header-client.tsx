@@ -178,30 +178,82 @@ export function HeaderClient({
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"
         }`}
       >
-        {/* Top utility bar */}
         <div className="bg-[#0B1C2C] text-white">
-          <div className="container mx-auto px-4 py-1.5 flex items-center justify-between text-xs">
-            <div className="flex items-center gap-4">
-              <Link href="/info-center/phoenix-365-day-home-trial" className="hover:text-[#C8A55C] transition-colors">
-                365-Day Home Trial
-              </Link>
-              <span className="hidden sm:inline text-white/40">|</span>
-              <Link href="/guarantee" className="hidden sm:inline hover:text-[#C8A55C] transition-colors">
-                Lifetime Warranty
-              </Link>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link href="/find-store" className="flex items-center gap-1 hover:text-[#C8A55C] transition-colors">
-                <MapPinIcon className="w-3 h-3" />
-                <span className="hidden sm:inline">Find in Store</span>
-              </Link>
-              <Link href="/account" className="hover:text-[#C8A55C] transition-colors">
-                My Account
-              </Link>
+          <div className="container mx-auto px-3 md:px-5">
+            <div className="flex items-center justify-between gap-3 h-11 py-1.5 text-xs">
+              {/* Left: Hamburger + Utility Links */}
+              <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
+                <button
+                  onClick={() => setMobileMenuOpen(true)}
+                  className="lg:hidden p-1.5 text-white hover:text-[#C8A55C] transition-colors"
+                  aria-label="Open menu"
+                >
+                  <MenuIcon className="w-5 h-5" />
+                </button>
+                <Link
+                  href="/info-center/phoenix-365-day-home-trial"
+                  className="hover:text-[#C8A55C] transition-colors whitespace-nowrap"
+                >
+                  365-Day Trial
+                </Link>
+                <span className="hidden sm:inline text-white/40">|</span>
+                <Link
+                  href="/guarantee"
+                  className="hidden sm:inline hover:text-[#C8A55C] transition-colors whitespace-nowrap"
+                >
+                  Warranty
+                </Link>
+                <span className="hidden md:inline text-white/40">|</span>
+                <Link
+                  href="/find-store"
+                  className="hidden md:flex items-center gap-1 hover:text-[#C8A55C] transition-colors whitespace-nowrap"
+                >
+                  <MapPinIcon className="w-3 h-3" />
+                  <span>Find Store</span>
+                </Link>
+              </div>
+
+              {/* Center: Secondary Nav Links (desktop only) */}
+              <div className="hidden lg:flex items-center gap-1 flex-shrink-0">
+                {[
+                  { href: "/reviews", label: "Reviews" },
+                  { href: "/compare", label: "Compare" },
+                  { href: "/about", label: "About" },
+                  { href: "/help", label: "Help" },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="px-2 py-1 text-xs font-medium text-white/90 hover:text-[#C8A55C] whitespace-nowrap transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+                <Link
+                  href="/led-christmas-trees-for-flagpole"
+                  className="px-2 py-1 text-xs font-bold text-[#C8A55C] hover:text-[#b8954c] whitespace-nowrap"
+                >
+                  Holiday Deals
+                </Link>
+              </div>
+
+              {/* Right: Search + Account */}
+              <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
+                <div className="flex-[2] max-w-xl min-w-0">
+                  <SearchBarWrapper />
+                </div>
+                <Link
+                  href={shopifyAccountUrl}
+                  className="hidden md:inline hover:text-[#C8A55C] transition-colors whitespace-nowrap"
+                >
+                  Account
+                </Link>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* Main Header Bar */}
         <div className="border-b border-gray-200">
           <div className="mx-auto max-w-[1400px] px-2 sm:px-4 lg:px-6">
             <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
@@ -216,7 +268,7 @@ export function HeaderClient({
                   <span className="text-xl sm:text-2xl font-bold text-[#0B1C2C] font-serif leading-tight">
                     ATLANTIC
                   </span>
-                  <span className="text-[10px] sm:text-xs text-[#D4AF37] font-semibold tracking-wider leading-tight">
+                  <span className="text-[10px] sm:text-xs text-[#D4AF37] font-semibold tracking-[0.48em] leading-tight text-center w-full">
                     FLAGPOLE
                   </span>
                 </div>
@@ -224,7 +276,7 @@ export function HeaderClient({
 
               {/* Desktop Navigation */}
               <nav className="hidden lg:flex items-center justify-center flex-1" ref={menuRef}>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                   {menuItems.map((item: any) => (
                     <div
                       key={item.id}
@@ -234,7 +286,7 @@ export function HeaderClient({
                     >
                       <Link
                         href={item.url}
-                        className="relative px-4 py-2 text-sm font-semibold text-[#0B1C2C] hover:text-[#C8A55C] transition-all duration-300 inline-flex items-center justify-center group"
+                        className="relative px-5 py-3 text-sm font-semibold text-[#0B1C2C] hover:text-[#C8A55C] transition-all duration-300 inline-flex items-center justify-center group"
                       >
                         <span>{item.title}</span>
                         <span
@@ -309,40 +361,6 @@ export function HeaderClient({
                     </span>
                   )}
                 </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-[#F5F3EF] border-b border-gray-200">
-          <div className="container mx-auto px-2 md:px-4">
-            <div className="flex items-center gap-2 h-10">
-              {/* Quick Links - compact */}
-              <div className="hidden lg:flex items-center gap-0.5 flex-shrink-0">
-                {[
-                  { href: "/reviews", label: "Reviews" },
-                  { href: "/compare", label: "Compare" },
-                  { href: "/about", label: "About" },
-                  { href: "/help-center", label: "Help" },
-                ].map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="px-2 py-1 text-xs font-medium text-[#0B1C2C] hover:text-[#C8A55C] whitespace-nowrap transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <Link
-                  href="/led-christmas-trees-for-flagpole"
-                  className="px-2 py-1 text-xs font-bold text-red-600 hover:text-red-700 whitespace-nowrap"
-                >
-                  Holiday Deals
-                </Link>
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <SearchBarWrapper />
               </div>
             </div>
           </div>
