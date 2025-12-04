@@ -1,7 +1,7 @@
 "use client"
-
-import type React from "react"
 import Link from "next/link"
+import type React from "react"
+
 import { useState, useEffect, useRef } from "react"
 import { FlagpoleQuizModal } from "@/components/quiz/flagpole-quiz-modal"
 import { useCart } from "@/components/cart/cart-context"
@@ -10,7 +10,6 @@ import type { Menu } from "@/lib/menus"
 import { NFLMenuClient } from "@/components/header/nfl-menu-client"
 import { ChristmasTreeMegaMenu } from "@/components/header/christmas-tree-mega-menu"
 import { isNFLMenuItem, isChristmasTreeMenuItem } from "@/lib/nfl-teams"
-import type { ShopifyProduct } from "@/lib/shopify/types"
 import { MegaMenuWithCart } from "@/components/header/mega-menu-with-cart"
 import { MobileMenuEnhanced } from "@/components/header/mobile-menu-enhanced"
 import { useGeo } from "@/lib/geo/context"
@@ -100,22 +99,22 @@ const MapPinIcon = ({ className }: { className?: string }) => (
 )
 
 interface HeaderClientProps {
-  menuData: Menu | null
+  menuData?: Menu | null
   megaMenuData?: Record<string, any>
   submenuProductsData?: Record<string, any[]>
-  nflFlagProducts: ShopifyProduct[]
-  christmasTreeProducts: ShopifyProduct[]
-  holidayProducts?: ShopifyProduct[]
-  partsProducts?: ShopifyProduct[]
+  nflFlagProducts?: any[]
+  christmasTreeProducts?: any[]
+  holidayProducts?: any[]
+  partsProducts?: any[]
   judgemeBadge?: React.ReactNode
 }
 
-export function HeaderClient({
+function HeaderClient({
   menuData,
   megaMenuData = {},
   submenuProductsData = {},
-  nflFlagProducts,
-  christmasTreeProducts,
+  nflFlagProducts = [],
+  christmasTreeProducts = [],
   holidayProducts = [],
   partsProducts = [],
   judgemeBadge,
@@ -123,12 +122,12 @@ export function HeaderClient({
   const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [closingDropdown, setClosingDropdown] = useState<string | null>(null)
-  const [quizModalOpen, setQuizModalOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const [isQuizOpen, setIsQuizOpen] = useState(false)
   const [isMounted, setIsMounted] = useState(false)
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const closeTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const { cart } = useCart()
-  const cartItemCount = cart?.lines?.edges ? cart.lines.edges.length : 0
+  const totalItems = cart?.lines?.edges ? cart.lines.edges.length : 0
   const menuRef = useRef<HTMLDivElement>(null)
   const animationTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const { location } = useGeo()
@@ -139,300 +138,261 @@ export function HeaderClient({
     setIsMounted(true)
   }, [])
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 100)
-    return () => clearTimeout(timer)
-  }, [])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-    handleScroll()
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setActiveDropdown(null)
-      }
-    }
-    if (activeDropdown) {
-      document.addEventListener("mousedown", handleClickOutside)
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
-    }
-  }, [activeDropdown])
-
-  useEffect(() => {
-    return () => {
-      if (animationTimeoutRef.current) {
-        clearTimeout(animationTimeoutRef.current)
-      }
-    }
-  }, [])
-
-  const handleMenuEnter = (itemId: string) => {
-    if (animationTimeoutRef.current) {
-      clearTimeout(animationTimeoutRef.current)
-      animationTimeoutRef.current = null
+  const handleMouseEnter = (itemId: string, hasDropdown: boolean) => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current)
+      hoverTimeoutRef.current = null
     }
 
     if (activeDropdown && activeDropdown !== itemId) {
       setClosingDropdown(activeDropdown)
       setActiveDropdown(null)
 
-      animationTimeoutRef.current = setTimeout(() => {
+      hoverTimeoutRef.current = setTimeout(() => {
         setClosingDropdown(null)
         setActiveDropdown(itemId)
-        animationTimeoutRef.current = null
+        hoverTimeoutRef.current = null
       }, 200)
-    } else if (!activeDropdown) {
+    } else if (!activeDropdown && hasDropdown) {
       setActiveDropdown(itemId)
     }
   }
 
-  const handleMenuLeave = () => {
-    if (activeDropdown) {
-      setClosingDropdown(activeDropdown)
-      setActiveDropdown(null)
-
-      animationTimeoutRef.current = setTimeout(() => {
-        setClosingDropdown(null)
-        animationTimeoutRef.current = null
+  const handleMouseLeave = (itemId: string, hasDropdown: boolean) => {
+    if (hasDropdown) {
+      closeTimeoutRef.current = setTimeout(() => {
+        setActiveDropdown(null)
+        closeTimeoutRef.current = null
       }, 200)
     }
   }
 
-  if (!menuData || !menuData.items || menuData.items.length === 0) {
-    return null
+  const openCart = () => {
+    setMobileMenuOpen(false)
+    // Logic to open cart goes here
   }
 
-  const menuItems = menuData.items
-
-  const isResourceMenu = (item: any) => {
-    const title = item.title.toLowerCase()
-    return title.includes("resource") || title.includes("about") || title.includes("company") || title.includes("info")
+  if (!menuData || !menuData.items || menuData.items.length === 0) {
+    console.error("[v0] HeaderClient: menuData or menuData.items is undefined")
+    return null
   }
 
   return (
     <>
       <header
-        className={`sticky top-0 z-50 w-full bg-white shadow-sm transition-all duration-500 ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full"
+        className={`w-full sticky top-0 z-50 bg-background shadow-md transition-all duration-500 ${
+          isMounted ? "opacity-100 translate-y-0 animate-header-slide-down" : "opacity-0 -translate-y-4"
         }`}
       >
-        <div className="bg-[#0B1C2C] text-white">
-          <div className="container mx-auto px-3 md:px-5">
-            <div className="flex items-center justify-between gap-3 h-11 py-1.5 text-xs">
-              {/* Left: Hamburger + Utility Links */}
-              <div className="flex items-center gap-2 md:gap-3 flex-shrink-0">
-                <button
-                  onClick={() => setMobileMenuOpen(true)}
-                  className="p-1.5 text-white hover:text-[#C8A55C] transition-colors"
-                  aria-label="Open menu"
-                >
-                  <MenuIcon className="w-5 h-5" />
-                </button>
+        <div className="bg-navy text-ivory border-b border-afp-gold/20">
+          <div className="container mx-auto">
+            <div className="flex items-center justify-between h-10 px-3 md:px-5 gap-3 text-xs md:text-sm">
+              {/* Left section: Hamburger + Utility Links */}
+              <div className="flex items-center gap-2 md:gap-4">
+                {isMounted && (
+                  <button
+                    onClick={() => setMobileMenuOpen(true)}
+                    className="text-ivory hover:text-gold transition-colors p-1.5 hover:bg-afp-white/10 rounded-lg"
+                    aria-label="Open menu"
+                  >
+                    <MenuIcon className="w-5 h-5" />
+                  </button>
+                )}
+
                 <Link
-                  href="/info-center/phoenix-365-day-home-trial"
-                  className="hover:text-[#C8A55C] transition-colors whitespace-nowrap"
+                  href="/pages/365-day-home-trial"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden sm:block"
                 >
                   365-Day Trial
                 </Link>
-                <span className="hidden sm:inline text-white/40">|</span>
+
                 <Link
-                  href="/guarantee"
-                  className="hidden sm:inline hover:text-[#C8A55C] transition-colors whitespace-nowrap"
+                  href="/pages/lifetime-warranty"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden md:block"
                 >
                   Warranty
                 </Link>
               </div>
 
-              {/* Center: Secondary Nav Links (desktop only) */}
-              <div className="hidden lg:flex items-center gap-1 flex-shrink-0">
-                {[
-                  { href: "/reviews", label: "Reviews" },
-                  { href: "/compare", label: "Compare" },
-                  { href: "/about", label: "About" },
-                  { href: "/help", label: "Help" },
-                ].map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="px-2 py-1 text-xs font-medium text-white/90 hover:text-[#C8A55C] whitespace-nowrap transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
+              {/* Center section: Secondary nav links + Search */}
+              <div className="flex items-center gap-2 md:gap-4 flex-1 justify-center max-w-3xl">
                 <Link
-                  href="/led-christmas-trees-for-flagpole"
-                  className="px-2 py-1 text-xs font-bold text-[#C8A55C] hover:text-[#b8954c] whitespace-nowrap"
+                  href="/pages/reviews"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden lg:block"
+                >
+                  Reviews
+                </Link>
+                <Link
+                  href="/pages/compare"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden lg:block"
+                >
+                  Compare
+                </Link>
+                <Link
+                  href="/pages/about"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden lg:block"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/pages/help"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden lg:block"
+                >
+                  Help
+                </Link>
+                <Link
+                  href="/collections/holiday-deals"
+                  className="text-ivory hover:text-gold transition-colors whitespace-nowrap hidden lg:block"
                 >
                   Holiday Deals
                 </Link>
-              </div>
 
-              {/* Right: Search + Account */}
-              <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
-                <div className="flex-[2] max-w-xl min-w-0">
+                {/* Search Bar */}
+                <div className="flex-[2] max-w-xl">
                   <SearchBarWrapper />
                 </div>
-                <Link
-                  href={shopifyAccountUrl}
-                  className="hidden md:inline hover:text-[#C8A55C] transition-colors whitespace-nowrap"
-                >
-                  Account
-                </Link>
               </div>
+
+              {/* Right section: Account */}
+              <Link
+                href="/account"
+                className="text-ivory hover:text-gold transition-colors whitespace-nowrap flex items-center gap-1.5"
+              >
+                <UserIcon className="w-4 h-4" />
+                <span className="hidden md:inline">Account</span>
+              </Link>
             </div>
           </div>
         </div>
 
-        {/* Main Header Bar */}
-        <div className="border-b border-gray-200">
-          <div className="mx-auto max-w-[1400px] px-2 sm:px-4 lg:px-6">
-            <div className="flex h-16 items-center justify-between gap-2 sm:gap-4">
+        <div className="bg-background border-b border-border">
+          <div className="container mx-auto">
+            <div className="flex items-center justify-between h-16 md:h-20 px-3 md:px-5 gap-3">
               {/* Logo */}
-              <Link href="/" className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
-                <img
-                  src="/images/favicon.png"
-                  alt="Atlantic Flagpole Logo"
-                  className="h-10 w-10 sm:h-12 sm:w-12 object-contain"
-                />
+              <Link href="/" className="flex items-center gap-3 group">
+                <img src="/images/favicon.png" alt="Atlantic Flagpole" className="w-10 h-10 md:w-12 md:h-12" />
                 <div className="flex flex-col">
-                  <span className="text-xl sm:text-2xl font-bold text-[#0B1C2C] font-serif leading-tight">
+                  <span className="font-serif font-bold text-lg md:text-xl text-foreground leading-tight">
                     ATLANTIC
                   </span>
-                  <span className="text-[10px] sm:text-xs text-[#D4AF37] font-semibold tracking-[0.48em] leading-tight text-center w-full">
+                  <span className="font-serif text-xs md:text-sm text-gold tracking-[0.48em] leading-tight">
                     FLAGPOLE
                   </span>
                 </div>
               </Link>
 
               {/* Desktop Navigation */}
-              <nav className="hidden lg:flex items-center justify-center flex-1" ref={menuRef}>
-                <div className="flex items-center gap-2">
-                  {menuItems.map((item: any) => (
-                    <div
-                      key={item.id}
-                      className="relative"
-                      onMouseEnter={() => handleMenuEnter(item.id)}
-                      onMouseLeave={handleMenuLeave}
-                    >
-                      <Link
-                        href={item.url}
-                        className="relative px-5 py-3 text-sm font-semibold text-[#0B1C2C] hover:text-[#C8A55C] transition-all duration-300 inline-flex items-center justify-center group"
-                      >
-                        <span>{item.title}</span>
-                        <span
-                          className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-[#C8A55C] transition-all duration-300 ${activeDropdown === item.id ? "w-full" : "w-0 group-hover:w-full"}`}
-                        />
-                      </Link>
+              <nav className="hidden lg:flex items-center gap-2">
+                {menuData.items.map((item) => {
+                  const isNFL = isNFLMenuItem(item.title)
+                  const isChristmas = isChristmasTreeMenuItem(item.title)
+                  const isInfoCenter = item.title === "Info Center"
+                  const hasDropdown = isNFL || isChristmas || isInfoCenter || (item.items && item.items.length > 0)
+                  const isActive = activeDropdown === item.title
 
-                      {/* Mega Menu Dropdown */}
-                      {(activeDropdown === item.id || closingDropdown === item.id) &&
-                        item.items &&
-                        item.items.length > 0 && (
-                          <div
-                            className={`fixed left-0 right-0 z-50 ${
-                              activeDropdown === item.id ? "animate-slideDown" : "animate-slideUp"
+                  return (
+                    <div
+                      key={item.title}
+                      className="relative"
+                      onMouseEnter={() => handleMouseEnter(item.title, hasDropdown)}
+                      onMouseLeave={() => handleMouseLeave(item.title, hasDropdown)}
+                    >
+                      {hasDropdown ? (
+                        <button
+                          className={`px-5 py-3 font-medium text-foreground hover:text-gold transition-colors relative ${
+                            isActive ? "text-gold" : ""
+                          }`}
+                        >
+                          {item.title}
+                          <span
+                            className={`absolute bottom-0 left-0 right-0 h-0.5 bg-gold transform transition-transform origin-left ${
+                              isActive ? "scale-x-100" : "scale-x-0"
                             }`}
-                            style={{ top: "calc(100% - 12px)" }}
-                            onMouseEnter={() => setActiveDropdown(item.id)}
-                            onMouseLeave={handleMenuLeave}
+                          />
+                        </button>
+                      ) : (
+                        <Link
+                          href={item.path}
+                          className="px-5 py-3 font-medium text-foreground hover:text-gold transition-colors relative group/link"
+                        >
+                          {item.title}
+                          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-gold transform transition-transform origin-left scale-x-0 group-hover/link:scale-x-100" />
+                        </Link>
+                      )}
+
+                      {hasDropdown && (isActive || closingDropdown === item.title) && (
+                        <div
+                          className="absolute left-0 right-0"
+                          style={{
+                            top: "calc(100% - 12px)",
+                            minWidth: isInfoCenter ? "300px" : isNFL || isChristmas ? "900px" : "800px",
+                          }}
+                        >
+                          {/* Invisible hover bridge */}
+                          <div className="h-3 w-full" />
+
+                          <div
+                            className={`bg-card border border-border shadow-xl rounded-lg overflow-hidden ${
+                              closingDropdown === item.title ? "animate-slideUp" : "animate-slideDown"
+                            }`}
                           >
-                            <div className="h-3" />
-                            <div className="bg-white shadow-2xl border-t-4 border-[#C8A55C]">
-                              <div className="container mx-auto px-4 py-6">
-                                {isNFLMenuItem(item.title) ? (
-                                  <NFLMenuClient
-                                    nflFlagProducts={nflFlagProducts}
-                                    onLinkClick={() => setActiveDropdown(null)}
-                                  />
-                                ) : isChristmasTreeMenuItem(item.title) ? (
-                                  <ChristmasTreeMegaMenu
-                                    products={christmasTreeProducts}
-                                    submenuProductsData={submenuProductsData}
-                                    onLinkClick={() => setActiveDropdown(null)}
-                                  />
-                                ) : isResourceMenu(item) ? (
-                                  <InfoCenterMegaMenu onLinkClick={() => setActiveDropdown(null)} />
-                                ) : (
-                                  <MegaMenuWithCart
-                                    title={item.title}
-                                    menuItems={item.items || []}
-                                    featuredProducts={megaMenuData[item.id]?.products?.nodes || []}
-                                    onLinkClick={() => setActiveDropdown(null)}
-                                  />
-                                )}
-                              </div>
-                            </div>
+                            {isNFL ? (
+                              <NFLMenuClient />
+                            ) : isChristmas ? (
+                              <ChristmasTreeMegaMenu />
+                            ) : isInfoCenter ? (
+                              <InfoCenterMegaMenu />
+                            ) : (
+                              <MegaMenuWithCart
+                                title={item.title}
+                                items={item.items || []}
+                                menuProducts={megaMenuData?.[item.id]?.products?.nodes || []}
+                              />
+                            )}
                           </div>
-                        )}
+                        </div>
+                      )}
                     </div>
-                  ))}
-                </div>
+                  )
+                })}
               </nav>
 
-              {/* Right Actions */}
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <Link
-                  href="/quiz"
-                  className="hidden md:flex items-center gap-2 px-4 py-2 bg-[#C8A55C] text-[#0B1C2C] text-sm font-bold rounded-lg hover:bg-[#b8954c] transition-colors"
-                >
-                  Take Quiz
-                </Link>
-                <Link
-                  href="/account"
-                  className="hidden lg:flex p-2 text-gray-600 hover:text-[#C8A55C] transition-colors"
-                  aria-label="Account"
-                >
-                  <UserIcon className="w-5 h-5" />
-                </Link>
-                <Link
-                  href="/cart"
-                  className="p-2 text-gray-600 hover:text-[#C8A55C] transition-colors relative"
-                  aria-label="Shopping cart"
-                >
-                  <ShoppingCartIcon className="w-5 h-5" />
-                  {cartItemCount > 0 && (
-                    <span className="absolute -top-0.5 -right-0.5 w-5 h-5 bg-[#C8A55C] text-white text-[10px] rounded-full flex items-center justify-center font-bold">
-                      {cartItemCount > 99 ? "99+" : cartItemCount}
-                    </span>
-                  )}
-                </Link>
-              </div>
+              {/* Cart Icon */}
+              <button
+                onClick={() => openCart()}
+                className="relative p-2 text-foreground hover:text-gold transition-colors rounded-lg hover:bg-muted"
+                aria-label={`Shopping cart with ${totalItems} items`}
+              >
+                <ShoppingCartIcon className="w-6 h-6" />
+                {totalItems > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-afp-danger text-afp-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {totalItems}
+                  </span>
+                )}
+              </button>
             </div>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu */}
       {isMounted && (
         <MobileMenuEnhanced
           isOpen={mobileMenuOpen}
           onClose={() => setMobileMenuOpen(false)}
-          shopifyAccountUrl={shopifyAccountUrl}
-          onQuizOpen={() => {
-            setMobileMenuOpen(false)
-            setQuizModalOpen(true)
-          }}
-          menuData={menuData}
+          menu={menuData}
           megaMenuData={megaMenuData}
-          submenuProductsData={submenuProductsData}
           nflFlagProducts={nflFlagProducts}
           christmasTreeProducts={christmasTreeProducts}
-          holidayProducts={holidayProducts}
-          partsProducts={partsProducts}
+          location={location}
+          stateCode={stateCode}
         />
       )}
 
-      <FlagpoleQuizModal isOpen={quizModalOpen} onClose={() => setQuizModalOpen(false)} />
-
-      {judgemeBadge && <div className="hidden">{judgemeBadge}</div>}
+      {/* Flagpole Quiz Modal */}
+      <FlagpoleQuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
     </>
   )
 }
+
+export { HeaderClient }
