@@ -204,7 +204,7 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
               className={`font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-2 md:mb-6 leading-tight transition-all duration-700 delay-100 drop-shadow-2xl font-bold ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
                 }`}
             >
-              Our Best Offer!
+              Start 2026 With Pride!
             </h1>
 
             <div
@@ -212,13 +212,13 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
                 }`}
             >
               <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold leading-tight mb-2">
-                Up To <span className="font-extrabold">40% Off</span>
+                Save Up To <span className="font-extrabold">40% Off</span>
               </p>
               <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold leading-tight mb-2">
-                Flagpoles <span className="text-base sm:text-lg md:text-3xl lg:text-4xl font-bold">+ $255 Of</span>
+                Flagpoles <span className="text-base sm:text-lg md:text-3xl lg:text-4xl font-bold">+ $255 In</span>
               </p>
               <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold leading-tight">
-                Accessories Included!<span className="text-white text-lg sm:text-xl md:text-2xl font-bold">*</span>
+                Free Accessories Included!<span className="text-white text-lg sm:text-xl md:text-2xl font-bold">*</span>
               </p>
             </div>
 
