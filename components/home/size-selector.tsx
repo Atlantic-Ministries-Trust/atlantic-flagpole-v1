@@ -17,7 +17,7 @@ const sizes = [
       "Great for smaller lots, condos, and properties where a subtle yet patriotic display is desired. The 15' height is tall enough to be seen from the street while remaining proportional to most single-story homes.",
     price: "$779",
     variant: "15' Flagpole",
-    href: "/product/phoenix-telescoping-flagpole-premier-kit-starter-bundle?variant=15",
+    href: "/products/phoenix-telescoping-flagpole-premier-kit-starter-bundle?variant=15",
   },
   {
     size: "20'",
@@ -31,7 +31,7 @@ const sizes = [
     price: "$899",
     badge: "BEST SELLER",
     variant: "20' Flagpole",
-    href: "/product/phoenix-telescoping-flagpole-premier-kit-starter-bundle?variant=20",
+    href: "/products/phoenix-telescoping-flagpole-premier-kit-starter-bundle?variant=20",
   },
   {
     size: "25'",
@@ -44,7 +44,7 @@ const sizes = [
       "For those who want maximum visibility and impact. The 25' flagpole towers over most residential properties and can be seen from blocks away. Ideal for corner lots, farms, estates, and commercial properties where you want to make a bold patriotic statement.",
     price: "$999",
     variant: "25' Flagpole",
-    href: "/product/phoenix-telescoping-flagpole-premier-kit-starter-bundle?variant=25",
+    href: "/products/phoenix-telescoping-flagpole-premier-kit-starter-bundle?variant=25",
   },
 ]
 
@@ -493,11 +493,10 @@ export function SizeSelector() {
                     key={item.size}
                     onClick={() => setSelectedSize(item)}
                     onMouseEnter={() => setSelectedSize(item)}
-                    className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-bold text-sm md:text-base transition-all duration-300 shadow-lg ${
-                      selectedSize.size === item.size
+                    className={`px-3 py-1.5 md:px-4 md:py-2 rounded-lg font-bold text-sm md:text-base transition-all duration-300 shadow-lg ${selectedSize.size === item.size
                         ? "bg-gradient-to-r from-[#C8A55C] to-[#D4AF37] text-[#0B1C2C] border-2 border-[#a88947]"
                         : "bg-white/95 backdrop-blur-sm text-[#666666] border border-[#C8A55C] hover:bg-[#C8A55C]/30 hover:text-[#0B1C2C]"
-                    }`}
+                      }`}
                   >
                     {item.size}
                   </button>
@@ -522,11 +521,10 @@ export function SizeSelector() {
                 key={index}
                 onMouseEnter={() => setSelectedSize(item)}
                 onClick={() => setSelectedSize(item)}
-                className={`group relative bg-white rounded-xl p-4 md:p-6 border-2 transition-all duration-300 cursor-pointer ${
-                  selectedSize.size === item.size
+                className={`group relative bg-white rounded-xl p-4 md:p-6 border-2 transition-all duration-300 cursor-pointer ${selectedSize.size === item.size
                     ? "border-[#C8A55C] shadow-xl scale-[1.02] md:scale-105"
                     : "border-[#E5E3DF] hover:border-[#C8A55C] hover:shadow-lg"
-                }`}
+                  }`}
               >
                 {item.badge && (
                   <div className="absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#C8A55C] to-[#D4AF37] text-[#0B1C2C] px-3 md:px-4 py-0.5 md:py-1 text-[10px] md:text-xs font-bold tracking-wider uppercase rounded-full shadow-md">
@@ -564,7 +562,7 @@ export function SizeSelector() {
 
           <div className="text-center mt-6 md:mt-10">
             <Link
-              href="/product/phoenix-telescoping-flagpole-premier-kit-starter-bundle"
+              href="/products/phoenix-telescoping-flagpole-premier-kit-starter-bundle"
               className="inline-flex items-center gap-2 md:gap-3 bg-gradient-to-r from-[#0B1C2C] to-[#1A2F44] hover:from-[#1A2F44] hover:to-[#0B1C2C] text-white font-bold text-base md:text-lg py-3 md:py-4 px-8 md:px-10 rounded-lg transition-all shadow-xl hover:shadow-2xl hover:scale-105"
             >
               Choose Your Size
