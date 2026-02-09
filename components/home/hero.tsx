@@ -194,25 +194,22 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
           <div className="max-w-xl lg:max-w-2xl mt-[100px] sm:mt-[110px] md:mt-0 mx-auto md:mx-0 text-center md:text-left">
             {/* Sale Badge */}
             <div
-              className={`inline-block bg-white text-[#0B1C2C] px-4 py-1.5 mb-2 md:mb-4 font-extrabold text-[11px] sm:text-xs md:text-sm tracking-widest uppercase shadow-lg transition-all duration-700 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`inline-block bg-white text-[#0B1C2C] px-4 py-1.5 mb-2 md:mb-4 font-extrabold text-[11px] sm:text-xs md:text-sm tracking-widest uppercase shadow-lg transition-all duration-700 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
-              FALL INTO SAVINGS
+              2026 NEW YEAR SAVINGS EVENT
             </div>
 
             <h1
-              className={`font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-2 md:mb-6 leading-tight transition-all duration-700 delay-100 drop-shadow-2xl font-bold ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-white mb-2 md:mb-6 leading-tight transition-all duration-700 delay-100 drop-shadow-2xl font-bold ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
               Our Best Offer!
             </h1>
 
             <div
-              className={`mb-3 md:mb-8 transition-all duration-700 delay-200 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`mb-3 md:mb-8 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
               <p className="text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white font-bold leading-tight mb-2">
                 Up To <span className="font-extrabold">40% Off</span>
@@ -226,9 +223,8 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
             </div>
 
             <div
-              className={`max-w-md mx-auto md:mx-0 mb-3 transition-all duration-700 delay-300 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`max-w-md mx-auto md:mx-0 mb-3 transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
               <div className="bg-white rounded-lg p-3 md:p-4 shadow-xl">
                 <p className="text-[#0B1C2C] text-[11px] sm:text-xs md:text-base font-bold mb-2 md:mb-3 text-center">
@@ -275,9 +271,8 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
             </div>
 
             <div
-              className={`max-w-md mx-auto md:mx-0 mb-3 md:mb-8 transition-all duration-700 delay-300 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`max-w-md mx-auto md:mx-0 mb-3 md:mb-8 transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
               <Link
                 href="/products"
@@ -288,9 +283,8 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
             </div>
 
             <div
-              className={`flex items-center justify-center md:justify-start gap-2 mb-2 md:mb-4 transition-all duration-700 delay-500 ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`flex items-center justify-center md:justify-start gap-2 mb-2 md:mb-4 transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
               <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse"></div>
               <p className="text-[10px] sm:text-xs md:text-sm font-extrabold text-white uppercase tracking-wide">
@@ -300,9 +294,8 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
 
             {/* Terms */}
             <p
-              className={`text-white/80 text-[10px] sm:text-xs md:text-sm mb-2 md:mb-8 transition-all duration-700 delay-600 font-semibold ${
-                isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
-              }`}
+              className={`text-white/80 text-[10px] sm:text-xs md:text-sm mb-2 md:mb-8 transition-all duration-700 delay-600 font-semibold ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-8"
+                }`}
             >
               *See Terms
             </p>
