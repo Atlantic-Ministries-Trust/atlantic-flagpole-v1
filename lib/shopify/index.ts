@@ -74,7 +74,10 @@ async function shopifyFetch<T>({
           query,
           variables,
         }),
-        cache: "no-store",
+        next: {
+          revalidate: 3600, // Cache for 1 hour
+          tags,
+        },
       },
       3, // 3 retries
       10000, // 10 second timeout
@@ -286,11 +289,11 @@ export async function getProduct(handle: string): Promise<ShopifyProduct | null>
       productTitle: result?.data?.product?.title,
       imagesStructure: result?.data?.product?.images
         ? {
-            type: typeof result.data.product.images,
-            hasNodes: !!(result.data.product.images as any).nodes,
-            nodesLength: (result.data.product.images as any).nodes?.length,
-            firstImageUrl: (result.data.product.images as any).nodes?.[0]?.url,
-          }
+          type: typeof result.data.product.images,
+          hasNodes: !!(result.data.product.images as any).nodes,
+          nodesLength: (result.data.product.images as any).nodes?.length,
+          firstImageUrl: (result.data.product.images as any).nodes?.[0]?.url,
+        }
         : null,
     })
 

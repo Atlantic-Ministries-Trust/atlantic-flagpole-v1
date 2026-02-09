@@ -106,7 +106,7 @@ async function judgemeApiFetch<T>(endpoint: string, options: RequestInit = {}): 
     const response = await fetch(url.toString(), {
       ...options,
       headers,
-      next: { revalidate: 300 }, // Cache for 5 minutes
+      next: { revalidate: 3600 }, // Cache for 1 hour
     })
 
     console.log(`[v0] Judge.me API response: ${response.status} ${response.statusText}`)
@@ -157,7 +157,7 @@ async function judgemeApiFetch<T>(endpoint: string, options: RequestInit = {}): 
 
 import { getCached, setCache } from "@/lib/cache"
 
-const JUDGEME_CACHE_DURATION = 10 * 60 * 1000 // 10 minutes
+const JUDGEME_CACHE_DURATION = 60 * 60 * 1000 // 1 hour
 
 export async function getJudgemeReviews(params: {
   productHandle?: string
@@ -235,7 +235,7 @@ export async function getJudgemeWidgetHtml(productHandle: string): Promise<strin
     const shopDomain = getShopDomain()
 
     const url = `https://judge.me/api/v1/widgets/product_review?shop_domain=${shopDomain}&handle=${productHandle}&platform=shopify`
-    const response = await fetch(url, { next: { revalidate: 300 } })
+    const response = await fetch(url, { next: { revalidate: 3600 } })
 
     if (!response.ok) {
       return ""

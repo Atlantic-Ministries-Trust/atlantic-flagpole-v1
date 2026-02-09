@@ -3,6 +3,11 @@ export type Money = {
   currencyCode: string
 }
 
+export type Connection<T> = {
+  edges?: Array<{ node: T }>
+  nodes?: Array<T>
+}
+
 export type SelectedOption = {
   name: string
   value: string
@@ -42,18 +47,14 @@ export type Product = {
     name: string
   } | null
   options: ProductOption[]
-  images: {
-    edges: Array<{ node: ProductImage }>
-  }
+  images: Connection<ProductImage>
   priceRange: {
     minVariantPrice: Money
   }
   compareAtPriceRange?: {
     minVariantPrice: Money | null
   } | null
-  variants: {
-    edges: Array<{ node: ProductVariant }>
-  }
+  variants: Connection<ProductVariant>
 }
 
 export type ShopifyProduct = Product
@@ -80,18 +81,14 @@ export type ShopifyCartLine = {
     product: {
       title: string
       handle?: string
-      images: {
-        edges: Array<{ node: ProductImage }>
-      }
+      images: Connection<ProductImage>
     }
   }
 }
 
 export type ShopifyCart = {
   id: string
-  lines: {
-    edges: Array<{ node: ShopifyCartLine }>
-  }
+  lines: Connection<ShopifyCartLine>
   cost: {
     totalAmount: Money
     subtotalAmount?: Money

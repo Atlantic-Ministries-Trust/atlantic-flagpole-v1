@@ -65,9 +65,8 @@ export function HeaderClient({
   return (
     <>
       <div
-        className={`md:hidden fixed inset-x-0 top-8 z-[999] bg-white/95 backdrop-blur-md border-b-2 border-[#C8A55C]/30 shadow-xl transition-transform duration-300 ${
-          isScrolled ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`md:hidden fixed inset-x-0 top-8 z-[999] bg-white/95 backdrop-blur-md border-b-2 border-[#C8A55C]/30 shadow-xl transition-transform duration-300 ${isScrolled ? "translate-y-0" : "-translate-y-full"
+          }`}
         style={{ height: "36px" }}
       >
         <div className="flex items-center justify-between h-full px-2">
@@ -81,9 +80,12 @@ export function HeaderClient({
           </button>
 
           {/* Center: Logo + Text */}
-          <Link href="/" className="flex items-center gap-1 flex-1 justify-center">
-            <Image src="/images/favicon.png" alt="Atlantic Flagpoles" width={20} height={20} className="w-5 h-5" />
-            <span className="text-[10px] font-extrabold text-[#0B1C2C] tracking-wider">ATLANTIC FLAGPOLE</span>
+          <Link href="/" className="flex items-center gap-1.5 flex-1 justify-center leading-none">
+            <Image src="/images/favicon.png" alt="Atlantic Flagpoles" width={22} height={22} className="w-5.5 h-5.5" />
+            <div className="flex flex-col">
+              <span className="text-[10px] font-cinzel font-bold text-[#0B1C2C] tracking-wider uppercase leading-none">ATLANTIC</span>
+              <span className="text-[7px] font-cinzel font-bold text-[#C8A55C] tracking-[0.15em] uppercase leading-none mt-0.5">FLAGPOLE</span>
+            </div>
           </Link>
 
           {/* Right: Icons - just sparkle, user, cart */}
@@ -159,15 +161,18 @@ export function HeaderClient({
                 </button>
 
                 {/* Center: Logo + Brand Name */}
-                <Link href="/" className="flex items-center gap-1.5 flex-1 justify-center">
+                <Link href="/" className="flex items-center gap-2 flex-1 justify-center leading-none">
                   <Image
                     src="/images/favicon.png"
                     alt="Atlantic Flagpoles"
-                    width={26}
-                    height={26}
-                    className="w-[26px] h-[26px]"
+                    width={32}
+                    height={32}
+                    className="w-8 h-8"
                   />
-                  <span className="text-[11px] font-extrabold text-[#0B1C2C] tracking-wider">ATLANTIC FLAGPOLE</span>
+                  <div className="flex flex-col pt-0.5">
+                    <span className="text-[12px] font-cinzel font-bold text-[#0B1C2C] tracking-wider uppercase leading-none">ATLANTIC</span>
+                    <span className="text-[8px] font-cinzel font-bold text-[#C8A55C] tracking-[0.2em] uppercase leading-none mt-0.5">FLAGPOLE</span>
+                  </div>
                 </Link>
 
                 {/* Right: Action Icons - sparkle (search), user, cart */}
@@ -208,17 +213,22 @@ export function HeaderClient({
                 <Menu className="w-8 h-8" />
               </button>
 
-              <Link href="/" className="flex items-center gap-4">
+              <Link href="/" className="flex items-center gap-2 group">
                 <Image
                   src="/images/favicon.png"
                   alt="Atlantic Flagpoles Logo"
                   width={64}
                   height={64}
-                  className="w-16 h-16"
+                  className="w-16 h-16 object-contain transition-transform duration-300 group-hover:scale-105"
                 />
-                <span className="text-4xl font-serif font-bold text-[#0B1C2C] tracking-wide hidden sm:block">
-                  ATLANTIC FLAGPOLES
-                </span>
+                <div className="flex flex-col leading-none pt-1">
+                  <span className="text-2xl lg:text-3xl font-cinzel font-bold text-[#0B1C2C] tracking-wider uppercase">
+                    Atlantic
+                  </span>
+                  <span className="text-sm lg:text-base font-cinzel font-bold text-[#C8A55C] tracking-[0.25em] mt-0.5 uppercase">
+                    Flagpole
+                  </span>
+                </div>
               </Link>
 
               {/* Search Bar - Desktop */}
