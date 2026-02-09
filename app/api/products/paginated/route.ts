@@ -1,7 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { searchProducts } from "@/lib/shopify/catalog"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function GET(req: NextRequest) {
   const searchParams = Object.fromEntries(req.nextUrl.searchParams.entries())

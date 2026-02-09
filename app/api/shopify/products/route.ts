@@ -1,7 +1,7 @@
 import { getProducts } from "@/lib/shopify"
 import { type NextRequest, NextResponse } from "next/server"
 
-export const runtime = "edge"
+export const runtime = 'edge';
 
 export const dynamic = "force-dynamic"
 

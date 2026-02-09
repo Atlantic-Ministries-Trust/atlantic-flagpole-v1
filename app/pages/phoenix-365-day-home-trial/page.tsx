@@ -3,7 +3,8 @@ import Link from "next/link"
 import { Check, Phone, ShoppingBag } from "lucide-react"
 import { PhoenixTrialFAQ } from "@/components/phoenix-trial-faq"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Phoenix 365-Day Home Trial | Atlantic Flagpole",

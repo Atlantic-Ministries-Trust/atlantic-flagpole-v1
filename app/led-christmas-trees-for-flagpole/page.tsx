@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { ChristmasTreeSalesPage } from "@/components/christmas/christmas-tree-sales-page"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "LED Christmas Trees for Flagpoles - Transform Your Flagpole | Atlantic Flagpole",

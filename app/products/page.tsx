@@ -4,7 +4,8 @@ import { InfiniteProductGrid } from "@/components/products/infinite-product-grid
 import { searchProducts } from "@/lib/shopify/catalog"
 import { getCollectionProducts, getAllCollections } from "@/lib/shopify/index"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const revalidate = 600
 

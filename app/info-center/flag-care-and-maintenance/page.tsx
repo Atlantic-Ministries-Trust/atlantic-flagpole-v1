@@ -2,7 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Flag, Sun, Wind, Droplets } from 'lucide-react'
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Flag Care & Maintenance | Atlantic Flagpole",

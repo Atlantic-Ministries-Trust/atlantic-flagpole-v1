@@ -10,7 +10,8 @@ import { StructuredData } from "@/components/seo/structured-data"
 import { InfiniteProductGrid } from "@/components/products/infinite-product-grid"
 import type { Metadata } from "next"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 const SHOPIFY_STORE_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || "v0-template.myshopify.com"
 const SHOPIFY_STOREFRONT_TOKEN = process.env.SHOPIFY_STOREFRONT_TOKEN || ""

@@ -1,7 +1,8 @@
 import Link from "next/link"
 import { Home, ShoppingBag, Info, HelpCircle, Phone, FileText } from "lucide-react"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Sitemap | Atlantic Flagpole",

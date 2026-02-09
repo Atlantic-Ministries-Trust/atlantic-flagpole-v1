@@ -2,7 +2,8 @@ import { type NextRequest, NextResponse } from "next/server"
 import { matchIntent, getRandomResponse } from "@/lib/flaggy/knowledge-base"
 import { getCollectionProducts, getProductImage } from "@/lib/shopify"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 interface ConversationContext {
   attempts: number

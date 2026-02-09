@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic"
 import { type NextRequest, NextResponse } from "next/server"
 import { detectLocationServer } from "@/lib/geo/detectLocation"
 
-export const runtime = "edge"
+export const runtime = 'edge';
 
 export async function GET(request: NextRequest) {
   try {

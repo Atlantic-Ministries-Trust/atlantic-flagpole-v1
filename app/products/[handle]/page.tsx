@@ -10,7 +10,8 @@ import { generateProductMetadata } from "@/lib/seo/metadata"
 import { generateProductSchema, generateBreadcrumbSchema } from "@/lib/seo/structured-data"
 import { StructuredData } from "@/components/seo/structured-data"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const revalidate = 3600
 

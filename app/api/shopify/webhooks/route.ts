@@ -1,7 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { revalidatePath, revalidateTag } from "next/cache"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 const SECRET = process.env.SHOPIFY_APP_API_SECRET_KEY || ""
 

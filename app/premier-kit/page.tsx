@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import { PhoenixPremierKitSalesPage } from "@/components/premier-kit/phoenix-premier-kit-sales-page"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Phoenix Telescoping Flagpole Premier Kit - The Last Flagpole You'll Ever Need | Atlantic Flagpole",

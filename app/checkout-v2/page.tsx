@@ -14,7 +14,8 @@ import Link from "next/link"
 import { useRouter, useSearchParams } from "next/navigation"
 import { ShoppingBag, User, Truck, Shield, Package, Mail, Phone, MapPin, CheckCircle2 } from "lucide-react"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 type OrderStatus = "pending" | "processing" | "shipped" | "delivered"
 

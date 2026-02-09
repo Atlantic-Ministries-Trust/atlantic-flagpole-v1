@@ -1,7 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { sendSupportTicketEmail } from "@/lib/email/support-ticket"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
   try {

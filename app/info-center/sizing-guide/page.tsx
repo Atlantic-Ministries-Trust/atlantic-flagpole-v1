@@ -2,7 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Ruler, Home, Building2 } from 'lucide-react'
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Flagpole Sizing Guide | Atlantic Flagpole",

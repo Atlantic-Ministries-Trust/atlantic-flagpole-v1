@@ -2,7 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { BookOpen, Clock, Moon, AlertCircle } from 'lucide-react'
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Flag Etiquette Guide | Atlantic Flagpole",

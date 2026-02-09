@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
 import { createCart, addCartLines, getCart } from "@/lib/shopify"
 
-export const runtime = "edge"
+export const runtime = 'edge';
 
 const CART_COOKIE_NAME = "shopify_cart_id"
 

@@ -2,7 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Wrench, CheckCircle2, AlertTriangle, Download } from 'lucide-react'
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Flagpole Installation Guide | Atlantic Flagpole",

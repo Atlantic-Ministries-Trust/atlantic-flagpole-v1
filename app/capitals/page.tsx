@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import { stateCapitals } from "@/lib/capitals/data"
 import Link from "next/link"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Shop by State | Premium Flagpoles for Every State Capital",

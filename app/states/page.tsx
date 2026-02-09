@@ -1,7 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Shop by State | Premium Flagpoles for Every State",

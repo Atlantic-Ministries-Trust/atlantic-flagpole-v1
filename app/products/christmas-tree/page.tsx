@@ -2,7 +2,8 @@ import { Suspense } from "react"
 import { ChristmasTreeProduct } from "@/components/products/christmas-tree-product"
 import { SnowOverlay } from "@/components/effects/snow-overlay"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Patriot Glo Flagpole Christmas Tree Light Kit | Atlantic Flagpole",

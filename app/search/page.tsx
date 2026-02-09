@@ -2,7 +2,8 @@ import { searchProducts } from "@/lib/shopify/catalog"
 import { InfiniteProductGrid } from "@/components/products/infinite-product-grid"
 import { SearchFilters } from "@/components/search/search-filters"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const revalidate = 600
 

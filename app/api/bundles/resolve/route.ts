@@ -3,7 +3,8 @@ import { assembleBundle } from "@/lib/bundles/assembleBundle"
 import { fetchBundleComponents } from "@/lib/shopify/queries/bundleComponents"
 import { getProduct } from "@/lib/shopify"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {

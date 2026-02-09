@@ -1,6 +1,7 @@
 import { FlagpoleFinder } from "@/components/flagpole-finder/flagpole-finder"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: "Flagpole Finder - Find Your Perfect Flagpole | Atlantic Flagpoles",

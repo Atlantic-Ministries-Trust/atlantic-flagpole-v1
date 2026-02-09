@@ -2,7 +2,8 @@ import { streamText } from "ai"
 import { searchArticles } from "@/lib/help-center/articles"
 import { getProducts } from "@/lib/shopify"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {

@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 interface FlagsSubcategoryPageProps {
   params: {

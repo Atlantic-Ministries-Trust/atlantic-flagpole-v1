@@ -1,6 +1,6 @@
 import { Mail, Phone, MapPin, Clock } from "lucide-react"
 
-export const runtime = "edge"
+export const runtime = 'edge';
 
 export const dynamic = "force-dynamic"
 

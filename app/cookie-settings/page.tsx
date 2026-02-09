@@ -8,7 +8,8 @@ import { useCookieConsent } from "@/components/cookie-consent/use-cookie-consent
 import { Shield, BarChart3, Target, CheckCircle } from "lucide-react"
 import Link from "next/link"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export default function CookieSettingsPage() {
   const { consent, updateConsent, resetConsent } = useCookieConsent()

@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { CompetitorComparisonClient } from "@/components/compare/competitor-comparison-client"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 const competitors = [
   { handle: "stand", name: "STAND Flagpoles" },

@@ -6,7 +6,8 @@ import { PhoenixProductShowcase } from "@/components/capitals/phoenix-product-sh
 import { SpotlightProducts } from "@/components/products/spotlight-products"
 import { FinalCTA } from "@/components/capitals/final-cta"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: "Alabama Flagpoles | Montgomery, AL | Premium Telescoping Flagpoles",

@@ -4,7 +4,8 @@ import { helpArticles, getRelatedArticles } from "@/lib/help-center/articles"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import { Markdown } from "@/components/ui/markdown"
 
-export const runtime = "edge"
+export const runtime = 'edge';
+export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
   return helpArticles.map((article) => ({
