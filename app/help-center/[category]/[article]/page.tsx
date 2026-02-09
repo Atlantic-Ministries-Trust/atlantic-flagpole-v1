@@ -2,7 +2,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { helpArticles, getRelatedArticles } from "@/lib/help-center/articles"
 import { ArrowLeft, ArrowRight } from "lucide-react"
-import ReactMarkdown from "react-markdown"
+import { Markdown } from "@/components/ui/markdown"
 
 export const runtime = "edge"
 
@@ -51,50 +51,49 @@ export default function ArticlePage({ params }: { params: { category: string; ar
         <div className="max-w-4xl mx-auto">
           <div className="bg-white rounded-xl p-8 shadow-sm border border-gray-100">
             <article className="prose prose-lg max-w-none">
-              <ReactMarkdown
+              <Markdown
+                content={article.content}
                 components={{
-                  h1: ({ children }) => (
+                  h1: ({ children }: any) => (
                     <h1 className="text-3xl font-serif font-bold text-[#0B1C2C] mb-4">{children}</h1>
                   ),
-                  h2: ({ children }) => (
+                  h2: ({ children }: any) => (
                     <h2 className="text-2xl font-serif font-bold text-[#0B1C2C] mt-8 mb-4">{children}</h2>
                   ),
-                  h3: ({ children }) => (
+                  h3: ({ children }: any) => (
                     <h3 className="text-xl font-serif font-bold text-[#0B1C2C] mt-6 mb-3">{children}</h3>
                   ),
-                  p: ({ children }) => <p className="text-[#0B1C2C]/80 leading-relaxed mb-4">{children}</p>,
-                  ul: ({ children }) => <ul className="list-disc list-inside space-y-2 mb-4">{children}</ul>,
-                  ol: ({ children }) => <ol className="list-decimal list-inside space-y-2 mb-4">{children}</ol>,
-                  li: ({ children }) => <li className="text-[#0B1C2C]/80">{children}</li>,
-                  a: ({ href, children }) => (
+                  p: ({ children }: any) => <p className="text-[#0B1C2C]/80 leading-relaxed mb-4">{children}</p>,
+                  ul: ({ children }: any) => <ul className="list-disc list-inside space-y-2 mb-4">{children}</ul>,
+                  ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-2 mb-4">{children}</ol>,
+                  li: ({ children }: any) => <li className="text-[#0B1C2C]/80">{children}</li>,
+                  a: ({ href, children }: any) => (
                     <Link href={href || "#"} className="text-[#C8A55C] hover:underline">
                       {children}
                     </Link>
                   ),
-                  strong: ({ children }) => <strong className="font-semibold text-[#0B1C2C]">{children}</strong>,
-                  blockquote: ({ children }) => (
+                  strong: ({ children }: any) => <strong className="font-semibold text-[#0B1C2C]">{children}</strong>,
+                  blockquote: ({ children }: any) => (
                     <blockquote className="border-l-4 border-[#C8A55C] pl-4 italic text-[#0B1C2C]/70 my-4">
                       {children}
                     </blockquote>
                   ),
-                  table: ({ children }) => (
+                  table: ({ children }: any) => (
                     <div className="overflow-x-auto my-6">
                       <table className="min-w-full divide-y divide-gray-200">{children}</table>
                     </div>
                   ),
-                  thead: ({ children }) => <thead className="bg-[#F5F3EF]">{children}</thead>,
-                  tbody: ({ children }) => <tbody className="divide-y divide-gray-200">{children}</tbody>,
-                  tr: ({ children }) => <tr>{children}</tr>,
-                  th: ({ children }) => (
+                  thead: ({ children }: any) => <thead className="bg-[#F5F3EF]">{children}</thead>,
+                  tbody: ({ children }: any) => <tbody className="divide-y divide-gray-200">{children}</tbody>,
+                  tr: ({ children }: any) => <tr>{children}</tr>,
+                  th: ({ children }: any) => (
                     <th className="px-4 py-3 text-left text-xs font-semibold text-[#0B1C2C] uppercase tracking-wider">
                       {children}
                     </th>
                   ),
-                  td: ({ children }) => <td className="px-4 py-3 text-sm text-[#0B1C2C]/80">{children}</td>,
+                  td: ({ children }: any) => <td className="px-4 py-3 text-sm text-[#0B1C2C]/80">{children}</td>,
                 }}
-              >
-                {article.content}
-              </ReactMarkdown>
+              />
             </article>
           </div>
 
