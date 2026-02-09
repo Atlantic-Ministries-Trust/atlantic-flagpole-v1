@@ -88,7 +88,7 @@ export function EnhancedHeaderClient({
           { label: "1% For Veterans", image: "/veterans-badge.jpg" },
           {
             label: "Made in USA",
-            image: "/images/madeinusabadge.jpg",
+            image: "/madeinusabadge.jpg",
           },
         ],
       }

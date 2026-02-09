@@ -292,7 +292,7 @@ export function MegaMenuWithCart({ title, menuItems, featuredProducts = [], onLi
                       <div className="absolute top-2 right-2 z-10">
                         <div className="relative w-10 h-10 rounded-full overflow-hidden bg-white shadow-lg border border-[#C8A55C]">
                           <Image
-                            src="/images/madeinusabadge.jpg"
+                            src="/madeinusabadge.jpg"
                             alt="Made in USA"
                             fill
                             sizes="40px"

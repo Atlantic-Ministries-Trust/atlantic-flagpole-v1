@@ -110,12 +110,12 @@ export function Footer() {
                 </div>
                 <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-[#C8A55C] hover:bg-white/10 transition-all flex items-center justify-center relative h-32">
                   <Image
-                    src="/images/design-mode/flagpole-made-in-the-usa.png"
-                    alt="Made in the USA - American Made Flagpoles"
-                    fill
-                    className="object-contain p-4"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    loading="lazy"
+                    src="/madeinusabadge.jpg"
+                  alt="Made in the USA - American Made Flagpoles"
+                  fill
+                  className="object-contain p-4"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  loading="lazy"
                   />
                 </div>
                 <div className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 hover:border-[#C8A55C] hover:bg-white/10 transition-all flex items-center justify-center relative h-32">

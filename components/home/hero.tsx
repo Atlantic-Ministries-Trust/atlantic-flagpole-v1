@@ -134,7 +134,7 @@ export function Hero({ judgemeStats }: HeroProps = {}) {
                 { src: "/images/bbb-logo.webp", alt: "BBB Accredited" },
                 { src: "/images/one-percent-planet.svg", alt: "1% for Planet" },
                 {
-                  src: "/images/madeinusabadge.jpg",
+                  src: "/madeinusabadge.jpg",
                   alt: "Made in USA",
                 },
               ].map((badge, index) => (

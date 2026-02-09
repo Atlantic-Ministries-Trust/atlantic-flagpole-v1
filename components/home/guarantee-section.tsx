@@ -1,5 +1,6 @@
 import { Shield, RotateCcw, Award, Truck, Star, CheckCircle } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const guarantees = [
   {
@@ -23,7 +24,11 @@ const guarantees = [
     description: "Ships in 1-2 business days. Fully insured.",
   },
   {
-    icon: <Star className="w-8 h-8" />,
+    icon: (
+      <div className="relative w-8 h-8">
+        <Image src="/madeinusabadge.jpg" alt="Made in USA" fill className="object-contain" />
+      </div>
+    ),
     title: "USA-Made, USA-Supported",
     description: "Manufactured and supported right here in America.",
   },

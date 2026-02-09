@@ -11,34 +11,38 @@ const trustReasons = [
     color: "from-blue-600 to-blue-800",
   },
   {
-    icon: <Award className="w-12 h-12" />,
-    title: "Made in USA",
-    description: "Proudly manufactured in America with aircraft-grade aluminum and premium craftsmanship.",
-    color: "from-red-600 to-red-800",
+    icon: (
+      <div className="relative w-12 h-12">
+      <Image src ="/madeinusabadge.jpg" alt="Made in USA" fill className="object-contain" />
+      </div >
+    ),
+title: "Made in USA",
+description: "Proudly manufactured in America with aircraft-grade aluminum and premium craftsmanship.",
+color: "from-red-600 to-red-800",
   },
-  {
-    icon: <Users className="w-12 h-12" />,
+{
+  icon: <Users className="w-12 h-12" />,
     title: "35,000+ Happy Customers",
-    description: "Join thousands of satisfied customers who trust Atlantic Flagpole for their homes.",
-    color: "from-[#C8A55C] to-[#B8954C]",
+      description: "Join thousands of satisfied customers who trust Atlantic Flagpole for their homes.",
+        color: "from-[#C8A55C] to-[#B8954C]",
   },
-  {
-    icon: <Truck className="w-12 h-12" />,
+{
+  icon: <Truck className="w-12 h-12" />,
     title: "Fast Shipping",
-    description: "Ships in 1-2 business days. Most orders arrive within a week.",
-    color: "from-green-600 to-green-800",
+      description: "Ships in 1-2 business days. Most orders arrive within a week.",
+        color: "from-green-600 to-green-800",
   },
-  {
-    icon: <Heart className="w-12 h-12" />,
+{
+  icon: <Heart className="w-12 h-12" />,
     title: "1% for the Planet",
-    description: "We donate 1% of sales to environmental causes. Your purchase makes a difference.",
-    color: "from-teal-600 to-teal-800",
+      description: "We donate 1% of sales to environmental causes. Your purchase makes a difference.",
+        color: "from-teal-600 to-teal-800",
   },
-  {
-    icon: <CheckCircle className="w-12 h-12" />,
+{
+  icon: <CheckCircle className="w-12 h-12" />,
     title: "365-Day Trial",
-    description: "Not satisfied? Return it within a year for a full refund. No questions asked.",
-    color: "from-purple-600 to-purple-800",
+      description: "Not satisfied? Return it within a year for a full refund. No questions asked.",
+        color: "from-purple-600 to-purple-800",
   },
 ]
 
