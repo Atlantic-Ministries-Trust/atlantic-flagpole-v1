@@ -3,7 +3,7 @@ import { CollectionsClient } from "@/components/collections/collections-client"
 
 export const runtime = 'edge';
 
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic';
 
 export default async function CollectionsPage() {
   let collections = []

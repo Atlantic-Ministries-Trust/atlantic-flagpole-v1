@@ -2,7 +2,7 @@ import { BundleBuilder } from "@/components/bundle/bundle-builder"
 
 export const runtime = 'edge';
 
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic';
 
 export default function BundleBuilderPage() {
   return (

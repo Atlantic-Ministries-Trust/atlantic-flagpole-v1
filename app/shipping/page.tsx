@@ -2,7 +2,7 @@ import { Truck, Package, RotateCcw, Shield } from "lucide-react"
 
 export const runtime = 'edge';
 
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic';
 
 export default function ShippingPage() {
   return (

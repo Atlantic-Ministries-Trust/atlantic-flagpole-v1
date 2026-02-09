@@ -11,7 +11,7 @@ import { generateOrganizationSchema } from "@/lib/seo/structured-data"
 import { StructuredData } from "@/components/seo/structured-data"
 import { generateHomeMetadata } from "@/lib/seo/metadata"
 import type { Metadata } from "next"
-import dynamic from "next/dynamic"
+import nextDynamic from "next/dynamic"
 import { Suspense } from "react"
 import { FadeInOnScroll } from "@/components/ui/fade-in-on-scroll"
 import { HomeClientComponents } from "./home-client"
@@ -19,28 +19,28 @@ import { HomeClientComponents } from "./home-client"
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-const PhoenixVsCompetition = dynamic(
+const PhoenixVsCompetition = nextDynamic(
   () => import("@/components/home/phoenix-vs-competition").then((mod) => ({ default: mod.PhoenixVsCompetition })),
   {
     loading: () => <div className="h-96 bg-white animate-pulse" />,
   },
 )
 
-const ExpandableReviews = dynamic(
+const ExpandableReviews = nextDynamic(
   () => import("@/components/home/expandable-reviews").then((mod) => ({ default: mod.ExpandableReviews })),
   {
     loading: () => <div className="h-96 bg-[#0A2740] animate-pulse" />,
   },
 )
 
-const RealHomesShowcase = dynamic(
+const RealHomesShowcase = nextDynamic(
   () => import("@/components/home/real-homes-showcase").then((mod) => ({ default: mod.RealHomesShowcase })),
   {
     loading: () => <div className="h-96 bg-[#0A2740] animate-pulse" />,
   },
 )
 
-const CustomerSpotlightCards = dynamic(
+const CustomerSpotlightCards = nextDynamic(
   () => import("@/components/home/customer-spotlight-cards").then((mod) => ({ default: mod.CustomerSpotlightCards })),
   {
     loading: () => <div className="h-96 bg-white animate-pulse" />,

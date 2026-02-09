@@ -3,7 +3,7 @@ import { getMenuWithNormalizedUrls, getCollectionWithProducts } from "@/lib/shop
 
 export const runtime = 'edge';
 
-export const dynamic = "force-dynamic"
+export const dynamic = 'force-dynamic';
 export const revalidate = 3600
 
 const fallbackMenu = {
