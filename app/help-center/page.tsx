@@ -3,6 +3,8 @@ import { helpCategories, getArticlesByCategory } from "@/lib/help-center/article
 import { AISearch } from "@/components/help-center/ai-search"
 import { ArrowRight, Search } from "lucide-react"
 
+export const runtime = "edge"
+
 export const metadata = {
   title: "Help Center | Atlantic Flagpole",
   description: "Find answers to your questions about Phoenix flagpoles, installation, warranty, and more",

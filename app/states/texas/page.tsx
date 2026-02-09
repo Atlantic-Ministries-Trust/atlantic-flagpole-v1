@@ -6,6 +6,8 @@ import { PhoenixProductShowcase } from "@/components/capitals/phoenix-product-sh
 import { SpotlightProducts } from "@/components/products/spotlight-products"
 import { FinalCTA } from "@/components/capitals/final-cta"
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Texas Flagpoles | Austin, TX | Premium Telescoping Flagpoles",
   description:

@@ -2,6 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { BookOpen, Clock, Moon, AlertCircle } from 'lucide-react'
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Flag Etiquette Guide | Atlantic Flagpole",
   description: "Official U.S. Flag Code rules and etiquette. Learn when and how to display the American flag properly.",

@@ -16,6 +16,8 @@ import { generateStateCapitalSchema, generateBreadcrumbSchema } from "@/lib/seo/
 import { StructuredData } from "@/components/seo/structured-data"
 import type { Metadata } from "next"
 
+export const runtime = "edge"
+
 interface StateCapitalPageProps {
   params: {
     state: string

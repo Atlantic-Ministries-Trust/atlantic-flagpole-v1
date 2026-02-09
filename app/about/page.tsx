@@ -1,5 +1,7 @@
 import { Award, Users, MapPin, Heart } from "lucide-react"
 
+export const runtime = "edge"
+
 export const dynamic = "force-dynamic"
 
 export default function AboutPage() {

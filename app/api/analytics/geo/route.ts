@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { cookies } from "next/headers"
 
+export const runtime = "edge"
+
 interface GeoEvent {
   event: string
   productId?: string

@@ -1,6 +1,8 @@
 import { getAllCollections } from "@/lib/shopify"
 import { CollectionsClient } from "@/components/collections/collections-client"
 
+export const runtime = "edge"
+
 export const dynamic = "force-dynamic"
 
 export default async function CollectionsPage() {

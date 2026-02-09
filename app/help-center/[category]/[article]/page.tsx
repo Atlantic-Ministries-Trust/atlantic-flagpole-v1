@@ -4,6 +4,8 @@ import { helpArticles, getRelatedArticles } from "@/lib/help-center/articles"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 
+export const runtime = "edge"
+
 export async function generateStaticParams() {
   return helpArticles.map((article) => ({
     category: article.categorySlug,

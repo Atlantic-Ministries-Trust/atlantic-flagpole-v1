@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { CompetitorComparisonClient } from "@/components/compare/competitor-comparison-client"
 
+export const runtime = "edge"
+
 const competitors = [
   { handle: "stand", name: "STAND Flagpoles" },
   { handle: "service-first", name: "Service First" },

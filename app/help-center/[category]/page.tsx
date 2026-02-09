@@ -3,6 +3,8 @@ import { notFound } from "next/navigation"
 import { helpCategories, getArticlesByCategory } from "@/lib/help-center/articles"
 import { ArrowLeft, ArrowRight } from "lucide-react"
 
+export const runtime = "edge"
+
 export async function generateStaticParams() {
   return helpCategories.map((category) => ({
     category: category.slug,

@@ -16,6 +16,8 @@ import { Suspense } from "react"
 import { FadeInOnScroll } from "@/components/ui/fade-in-on-scroll"
 import { HomeClientComponents } from "./home-client"
 
+export const runtime = "edge"
+
 const PhoenixVsCompetition = dynamic(
   () => import("@/components/home/phoenix-vs-competition").then((mod) => ({ default: mod.PhoenixVsCompetition })),
   {

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { getProducts } from "@/lib/shopify"
 
+export const runtime = "edge"
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)

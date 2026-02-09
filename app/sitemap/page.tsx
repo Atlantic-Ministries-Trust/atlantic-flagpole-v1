@@ -1,6 +1,8 @@
 import Link from "next/link"
 import { Home, ShoppingBag, Info, HelpCircle, Phone, FileText } from "lucide-react"
 
+export const runtime = "edge"
+
 export const metadata = {
   title: "Sitemap | Atlantic Flagpole",
   description: "Navigate our complete site directory to find flagpoles, flags, accessories, and helpful resources.",

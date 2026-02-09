@@ -1,5 +1,7 @@
 import { FlagpoleQuizClient } from "@/components/quiz/flagpole-quiz-client"
 
+export const runtime = "edge"
+
 export const metadata = {
   title: "Flagpole & Flag Quiz - Test Your Knowledge | Atlantic Flagpoles",
   description: "Test your knowledge about flagpoles, flags, and proper display etiquette. Complete our quiz for exclusive rewards!",

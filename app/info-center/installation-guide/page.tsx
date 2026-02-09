@@ -2,6 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Wrench, CheckCircle2, AlertTriangle, Download } from 'lucide-react'
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Flagpole Installation Guide | Atlantic Flagpole",
   description: "Step-by-step instructions for installing your Phoenix telescoping flagpole. DIY-friendly guide with diagrams and tips.",

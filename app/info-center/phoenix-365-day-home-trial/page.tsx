@@ -4,6 +4,8 @@ import Link from "next/link"
 import { Star, Award, Shield, CheckCircle, Users, TrendingUp, Medal, Trophy } from "lucide-react"
 import { getJudgemeReviews, getJudgemeStats } from "@/lib/judgeme"
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Phoenix 365-Day Home Trial | Atlantic Flagpole",
   description:

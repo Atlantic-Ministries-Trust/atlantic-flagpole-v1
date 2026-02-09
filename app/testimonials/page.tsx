@@ -3,6 +3,8 @@ import { getAllJudgemeReviews, getJudgemeStats } from "@/lib/judgeme"
 import { Card } from "@/components/ui/card"
 import Image from "next/image"
 
+export const runtime = "edge"
+
 export const metadata = {
   title: "Customer Testimonials | Atlantic Flagpole",
   description: "Read what our customers have to say about Atlantic Flagpole products and service.",

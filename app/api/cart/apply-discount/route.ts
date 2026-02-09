@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { shopifyFetch } from "@/lib/shopify"
 
+export const runtime = "edge"
+
 export const dynamic = "force-dynamic"
 
 export async function POST(request: NextRequest) {

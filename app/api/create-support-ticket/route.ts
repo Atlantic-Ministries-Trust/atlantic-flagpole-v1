@@ -1,6 +1,8 @@
 import { type NextRequest, NextResponse } from "next/server"
 import { sendSupportTicketEmail } from "@/lib/email/support-ticket"
 
+export const runtime = "edge"
+
 export async function POST(request: NextRequest) {
   try {
     const { customerName, customerEmail, issueSummary, chatHistory } = await request.json()

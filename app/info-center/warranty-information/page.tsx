@@ -2,6 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Shield, Check, FileText } from 'lucide-react'
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Lifetime Warranty Information | Atlantic Flagpole",
   description: "Details about our industry-leading lifetime warranty on Phoenix Flagpoles. We stand behind our American-made quality forever.",

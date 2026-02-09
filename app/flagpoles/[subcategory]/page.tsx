@@ -1,5 +1,7 @@
 import { notFound, redirect } from "next/navigation"
 
+export const runtime = "edge"
+
 interface FlagpoleSubcategoryPageProps {
   params: {
     subcategory: string

@@ -2,6 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { BookOpen, Wrench, Shield, Wind, Ruler, Flag, ShoppingCart, Heart } from "lucide-react"
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Info Center | Atlantic Flagpole",
   description:

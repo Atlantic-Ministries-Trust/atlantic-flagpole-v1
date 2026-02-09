@@ -29,6 +29,8 @@ import {
 } from "lucide-react"
 import { getBundleConfig } from "@/lib/bundles/bundle-config"
 
+export const runtime = "edge"
+
 type CheckoutStep = "customer" | "shipping" | "payment"
 
 export default function CheckoutPage() {

@@ -2,6 +2,8 @@ import { type NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 import { revalidatePath, revalidateTag } from "next/cache"
 
+export const runtime = "edge"
+
 const SECRET = process.env.SHOPIFY_APP_API_SECRET_KEY || ""
 
 function verify(raw: string, sig: string | null) {

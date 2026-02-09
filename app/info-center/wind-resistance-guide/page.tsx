@@ -2,6 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Wind, ShieldCheck, Map } from 'lucide-react'
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Wind Resistance Guide | Atlantic Flagpole",
   description: "Understanding wind ratings for flagpoles. Learn why our Phoenix Flagpoles are rated for 100+ MPH winds.",

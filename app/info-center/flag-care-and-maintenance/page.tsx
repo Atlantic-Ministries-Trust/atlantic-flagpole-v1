@@ -2,6 +2,8 @@ import Link from "next/link"
 import type { Metadata } from "next"
 import { Flag, Sun, Wind, Droplets } from 'lucide-react'
 
+export const runtime = "edge"
+
 export const metadata: Metadata = {
   title: "Flag Care & Maintenance | Atlantic Flagpole",
   description: "Learn how to clean, repair, and maintain your American flag and flagpole to ensure they last for years.",

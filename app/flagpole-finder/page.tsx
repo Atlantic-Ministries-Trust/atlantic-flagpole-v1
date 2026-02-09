@@ -1,5 +1,7 @@
 import { FlagpoleFinder } from "@/components/flagpole-finder/flagpole-finder"
 
+export const runtime = "edge"
+
 export const metadata = {
   title: "Flagpole Finder - Find Your Perfect Flagpole | Atlantic Flagpoles",
   description: "Answer a few simple questions and we'll recommend the perfect flagpole for your needs.",
