@@ -25,19 +25,20 @@ allFiles.forEach(filePath => {
     let content = fs.readFileSync(filePath, 'utf8');
     let changed = false;
 
-    // 1. Fix the "double dynamic" conflict:
-    // If we have "import dynamic from 'next/dynamic'" AND we are about to add "export const dynamic = ..."
-    // we must rename the import.
+    // 1. Rename conflicting 'dynamic' import
     if (content.match(/import\s+dynamic\s+from\s+['"]next\/dynamic['"]/)) {
-        console.log(`Renaming dynamic import in: ${filePath}`);
         content = content.replace(/import\s+dynamic\s+from\s+(['"]next\/dynamic['"])/g, 'import nextDynamic from $1');
-        // Replace usages: dynamic( -> nextDynamic(
-        // We use a simple regex but it should be safe for most page files
         content = content.replace(/\bdynamic\(/g, 'nextDynamic(');
         changed = true;
     }
 
-    // 2. Ensure runtime = 'edge'
+    // 2. Remove incompatible config (revalidate)
+    if (content.includes('export const revalidate')) {
+        content = content.replace(/^.*export const revalidate.*$/gm, '');
+        changed = true;
+    }
+
+    // 3. Ensure runtime = 'edge'
     if (!content.includes("export const runtime = 'edge'") && !content.includes('export const runtime = "edge"')) {
         const lines = content.split('\n');
         let insertIndex = 0;
@@ -54,7 +55,7 @@ allFiles.forEach(filePath => {
         changed = true;
     }
 
-    // 3. Ensure dynamic = 'force-dynamic' (careful not to add if already exists)
+    // 4. Ensure dynamic = 'force-dynamic'
     if (!content.includes("export const dynamic = 'force-dynamic'") && !content.includes('export const dynamic = "force-dynamic"')) {
         const lines = content.split('\n');
         let insertIndex = 0;

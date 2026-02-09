@@ -5,7 +5,7 @@ import { SearchFilters } from "@/components/search/search-filters"
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-export const revalidate = 600
+
 
 interface SearchPageProps {
   searchParams: {

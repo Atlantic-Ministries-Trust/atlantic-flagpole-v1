@@ -7,7 +7,7 @@ import { getCollectionProducts, getAllCollections } from "@/lib/shopify/index"
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
-export const revalidate = 600
+
 
 interface ProductsPageProps {
   searchParams: {

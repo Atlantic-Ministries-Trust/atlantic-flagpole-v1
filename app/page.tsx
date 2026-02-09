@@ -49,7 +49,7 @@ const CustomerSpotlightCards = nextDynamic(
 
 export const metadata: Metadata = generateHomeMetadata()
 
-export const revalidate = 3600
+
 
 export default async function Home() {
   let judgemeStats = { averageRating: 4.9, totalReviews: 2500 }
